@@ -1,0 +1,94 @@
+---- Minecraft Crash Report ----
+// Everything's going to plan. No, really, that was supposed to happen.
+
+Time: 6/19/17 8:57 PM
+Description: Ticking player
+
+java.lang.NullPointerException: Ticking player
+	at net.minecraft.item.ItemStack.areItemStacksEqual(ItemStack.java:495)
+	at net.minecraft.inventory.Container.detectAndSendChanges(Container.java:100)
+	at net.minecraft.entity.player.EntityPlayerMP.onUpdate(EntityPlayerMP.java:366)
+	at net.minecraft.world.World.updateEntityWithOptionalForce(World.java:2130)
+	at net.minecraft.world.WorldServer.updateEntityWithOptionalForce(WorldServer.java:869)
+	at net.minecraft.world.World.updateEntity(World.java:2090)
+	at net.minecraft.world.WorldServer.tickPlayers(WorldServer.java:670)
+	at net.minecraft.world.World.updateEntities(World.java:1877)
+	at net.minecraft.world.WorldServer.updateEntities(WorldServer.java:641)
+	at net.minecraft.server.MinecraftServer.updateTimeLightAndEntities(MinecraftServer.java:836)
+	at net.minecraft.server.MinecraftServer.tick(MinecraftServer.java:740)
+	at net.minecraft.server.integrated.IntegratedServer.tick(IntegratedServer.java:192)
+	at net.minecraft.server.MinecraftServer.run(MinecraftServer.java:589)
+	at java.lang.Thread.run(Thread.java:745)
+
+
+A detailed walkthrough of the error, its code path and all known details is as follows:
+---------------------------------------------------------------------------------------
+
+-- Head --
+Thread: Server thread
+Stacktrace:
+	at net.minecraft.item.ItemStack.areItemStacksEqual(ItemStack.java:495)
+	at net.minecraft.inventory.Container.detectAndSendChanges(Container.java:100)
+	at net.minecraft.entity.player.EntityPlayerMP.onUpdate(EntityPlayerMP.java:366)
+	at net.minecraft.world.World.updateEntityWithOptionalForce(World.java:2130)
+	at net.minecraft.world.WorldServer.updateEntityWithOptionalForce(WorldServer.java:869)
+	at net.minecraft.world.World.updateEntity(World.java:2090)
+
+-- Player being ticked --
+Details:
+	Entity Type: null (net.minecraft.entity.player.EntityPlayerMP)
+	Entity ID: 262
+	Entity Name: Player649
+	Entity's Exact location: -6.30, 64.00, 240.66
+	Entity's Block location: World: (-7,64,240), Chunk: (at 9,4,0 in -1,15; contains blocks -16,0,240 to -1,255,255), Region: (-1,0; contains chunks -32,0 to -1,31, blocks -512,0,0 to -1,255,511)
+	Entity's Momentum: 0.00, -0.08, 0.00
+	Entity's Passengers: []
+	Entity's Vehicle: ~~ERROR~~ NullPointerException: null
+Stacktrace:
+	at net.minecraft.world.WorldServer.tickPlayers(WorldServer.java:670)
+	at net.minecraft.world.World.updateEntities(World.java:1877)
+	at net.minecraft.world.WorldServer.updateEntities(WorldServer.java:641)
+
+-- Affected level --
+Details:
+	Level name: New World
+	All players: 1 total; [EntityPlayerMP['Player649'/262, l='New World', x=-6.30, y=64.00, z=240.66]]
+	Chunk stats: ServerChunkCache: 626 Drop: 0
+	Level seed: -9165289517596585640
+	Level generator: ID 00 - default, ver 1. Features enabled: true
+	Level generator options: 
+	Level spawn location: World: (-1,64,235), Chunk: (at 15,4,11 in -1,14; contains blocks -16,0,224 to -1,255,239), Region: (-1,0; contains chunks -32,0 to -1,31, blocks -512,0,0 to -1,255,511)
+	Level time: 609 game time, 609 day time
+	Level dimension: 0
+	Level storage version: 0x04ABD - Anvil
+	Level weather: Rain time: 144775 (now: false), thunder time: 105307 (now: false)
+	Level game mode: Game mode: creative (ID 1). Hardcore: false. Cheats: true
+Stacktrace:
+	at net.minecraft.server.MinecraftServer.updateTimeLightAndEntities(MinecraftServer.java:836)
+	at net.minecraft.server.MinecraftServer.tick(MinecraftServer.java:740)
+	at net.minecraft.server.integrated.IntegratedServer.tick(IntegratedServer.java:192)
+	at net.minecraft.server.MinecraftServer.run(MinecraftServer.java:589)
+	at java.lang.Thread.run(Thread.java:745)
+
+-- System Details --
+Details:
+	Minecraft Version: 1.12
+	Operating System: Windows 10 (amd64) version 10.0
+	Java Version: 1.8.0_101, Oracle Corporation
+	Java VM Version: Java HotSpot(TM) 64-Bit Server VM (mixed mode), Oracle Corporation
+	Memory: 217586848 bytes (207 MB) / 964689920 bytes (920 MB) up to 1890582528 bytes (1803 MB)
+	JVM Flags: 0 total; 
+	IntCache: cache: 1, tcache: 1, allocated: 12, tallocated: 94
+	FML: MCP 9.40 Powered by Forge 14.21.0.2321 5 mods loaded, 5 mods active
+	States: 'U' = Unloaded 'L' = Loaded 'C' = Constructed 'H' = Pre-initialized 'I' = Initialized 'J' = Post-initialized 'A' = Available 'D' = Disabled 'E' = Errored
+	UCHIJAAAA	minecraft{1.12} [Minecraft] (minecraft.jar) 
+	UCHIJAAAA	mcp{9.19} [Minecraft Coder Pack] (minecraft.jar) 
+	UCHIJAAAA	FML{8.0.99.99} [Forge Mod Loader] (forgeSrc-1.12-14.21.0.2321.jar) 
+	UCHIJAAAA	forge{14.21.0.2321} [Minecraft Forge] (forgeSrc-1.12-14.21.0.2321.jar) 
+	UCHIJAAAA	chromaticengineering{0.01} [Chromatic Engineering] (bin) 
+	Loaded coremods (and transformers): 
+	GL info: ~~ERROR~~ RuntimeException: No OpenGL context found in the current thread.
+	Profiler Position: N/A (disabled)
+	Player Count: 1 / 8; [EntityPlayerMP['Player649'/262, l='New World', x=-6.30, y=64.00, z=240.66]]
+	Type: Integrated Server (map_client.txt)
+	Is Modded: Definitely; Client brand changed to 'fml,forge'

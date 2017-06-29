@@ -2,21 +2,33 @@ package com.grumpybear.chromeng.init;
 
 import com.grumpybear.chromeng.item.ItemChromaDust;
 import com.grumpybear.chromeng.item.ItemDarksign;
+import com.grumpybear.chromeng.item.ItemLordvessel;
+import com.grumpybear.chromeng.item.ItemPalette;
 import com.grumpybear.chromeng.item.workonlater.ItemBlockDesignator;
 import com.grumpybear.chromeng.item.workonlater.ItemLocationCard;
-
 import net.minecraft.item.Item;
+import net.minecraftforge.event.RegistryEvent;
+import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
+import net.minecraftforge.registries.IForgeRegistry;
 
+@Mod.EventBusSubscriber
 public class ModItems {
-	public static Item locationCard;
-	public static Item blockDesignator;
-	public static Item chromaDust;
-	public static Item darksign;
+	public static Item locationCard = new ItemLocationCard();
+	public static Item blockDesignator = new ItemBlockDesignator();
+	public static Item chromaDust = new ItemChromaDust();
+	public static Item darksign = new ItemDarksign();
+	public static Item palette = new ItemPalette();
+	public static Item lordvessel = new ItemLordvessel();
 	
-	public static void init() {
-		locationCard = new ItemLocationCard();
-		blockDesignator = new ItemBlockDesignator();
-		chromaDust = new ItemChromaDust();
-		darksign = new ItemDarksign();
+	@SubscribeEvent
+	public static void registerItems(RegistryEvent.Register<Item> evt) {
+		IForgeRegistry<Item> registry = evt.getRegistry();
+		registry.register(locationCard);
+		registry.register(blockDesignator);
+		registry.register(chromaDust);
+		registry.register(darksign);
+		registry.register(palette);
+		registry.register(lordvessel);
 	}
 }

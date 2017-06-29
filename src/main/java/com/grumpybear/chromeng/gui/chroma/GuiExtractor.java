@@ -4,7 +4,6 @@ import com.grumpybear.chromeng.block.tile.TileExtractor;
 import com.grumpybear.chromeng.chroma.IChromaStorage;
 import com.grumpybear.chromeng.gui.container.chroma.ContainerExtractor;
 import com.grumpybear.chromeng.gui.element.GuiChroma;
-
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.util.ResourceLocation;
@@ -22,9 +21,8 @@ public class GuiExtractor extends GuiChroma{
 		tileExtractor = tile;
 	}
 
-	@Override
+   @Override
 	protected void drawGuiContainerBackgroundLayer(float partialTicks, int mouseX, int mouseY) {
-		super.drawGuiContainerBackgroundLayer(partialTicks, mouseX, mouseY);
 		
 		int i = (this.width - this.xSize) / 2;
         int j = (this.height - this.ySize) / 2;
@@ -41,6 +39,7 @@ public class GuiExtractor extends GuiChroma{
 
         int l = this.getCookProgressScaled(24);
         this.drawTexturedModalRect(i + 79, j + 34, 176, 14, l + 1, 16);
+      super.drawGuiContainerBackgroundLayer(partialTicks, mouseX, mouseY);
 	}
 	
 	private int getCookProgressScaled(int pixels)

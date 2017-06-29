@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/Chromatic Engineering.iml" filepath="$PROJECT_DIR$/Chromatic Engineering.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/Chromatic_Engineering_api.iml" filepath="$PROJECT_DIR$/.idea/modules/Chromatic_Engineering_api.iml" group="Chromatic Engineering" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/Chromatic_Engineering_main.iml" filepath="$PROJECT_DIR$/.idea/modules/Chromatic_Engineering_main.iml" group="Chromatic Engineering" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/Chromatic_Engineering_test.iml" filepath="$PROJECT_DIR$/.idea/modules/Chromatic_Engineering_test.iml" group="Chromatic Engineering" />
+    </modules>
+  </component>
+</project>

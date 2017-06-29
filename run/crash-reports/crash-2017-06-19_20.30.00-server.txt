@@ -1,0 +1,96 @@
+---- Minecraft Crash Report ----
+// Quite honestly, I wouldn't worry myself about that.
+
+Time: 6/19/17 8:30 PM
+Description: Ticking player
+
+java.lang.ArrayIndexOutOfBoundsException: 0
+	at com.grumpybear.chromeng.block.tile.TileInventory.getStackInSlot(TileInventory.java:103)
+	at net.minecraft.inventory.Slot.getStack(Slot.java:81)
+	at net.minecraft.inventory.Container.detectAndSendChanges(Container.java:97)
+	at net.minecraft.entity.player.EntityPlayerMP.onUpdate(EntityPlayerMP.java:366)
+	at net.minecraft.world.World.updateEntityWithOptionalForce(World.java:2130)
+	at net.minecraft.world.WorldServer.updateEntityWithOptionalForce(WorldServer.java:869)
+	at net.minecraft.world.World.updateEntity(World.java:2090)
+	at net.minecraft.world.WorldServer.tickPlayers(WorldServer.java:670)
+	at net.minecraft.world.World.updateEntities(World.java:1877)
+	at net.minecraft.world.WorldServer.updateEntities(WorldServer.java:641)
+	at net.minecraft.server.MinecraftServer.updateTimeLightAndEntities(MinecraftServer.java:836)
+	at net.minecraft.server.MinecraftServer.tick(MinecraftServer.java:740)
+	at net.minecraft.server.integrated.IntegratedServer.tick(IntegratedServer.java:192)
+	at net.minecraft.server.MinecraftServer.run(MinecraftServer.java:589)
+	at java.lang.Thread.run(Thread.java:745)
+
+
+A detailed walkthrough of the error, its code path and all known details is as follows:
+---------------------------------------------------------------------------------------
+
+-- Head --
+Thread: Server thread
+Stacktrace:
+	at com.grumpybear.chromeng.block.tile.TileInventory.getStackInSlot(TileInventory.java:103)
+	at net.minecraft.inventory.Slot.getStack(Slot.java:81)
+	at net.minecraft.inventory.Container.detectAndSendChanges(Container.java:97)
+	at net.minecraft.entity.player.EntityPlayerMP.onUpdate(EntityPlayerMP.java:366)
+	at net.minecraft.world.World.updateEntityWithOptionalForce(World.java:2130)
+	at net.minecraft.world.WorldServer.updateEntityWithOptionalForce(WorldServer.java:869)
+	at net.minecraft.world.World.updateEntity(World.java:2090)
+
+-- Player being ticked --
+Details:
+	Entity Type: null (net.minecraft.entity.player.EntityPlayerMP)
+	Entity ID: 197
+	Entity Name: Player358
+	Entity's Exact location: -15.50, 66.00, -249.13
+	Entity's Block location: World: (-16,66,-250), Chunk: (at 0,4,6 in -1,-16; contains blocks -16,0,-256 to -1,255,-241), Region: (-1,-1; contains chunks -32,-32 to -1,-1, blocks -512,0,-512 to -1,255,-1)
+	Entity's Momentum: 0.00, -0.08, 0.00
+	Entity's Passengers: []
+	Entity's Vehicle: ~~ERROR~~ NullPointerException: null
+Stacktrace:
+	at net.minecraft.world.WorldServer.tickPlayers(WorldServer.java:670)
+	at net.minecraft.world.World.updateEntities(World.java:1877)
+	at net.minecraft.world.WorldServer.updateEntities(WorldServer.java:641)
+
+-- Affected level --
+Details:
+	Level name: New World
+	All players: 1 total; [EntityPlayerMP['Player358'/197, l='New World', x=-15.50, y=66.00, z=-249.13]]
+	Chunk stats: ServerChunkCache: 625 Drop: 0
+	Level seed: -1986990662459824482
+	Level generator: ID 00 - default, ver 1. Features enabled: true
+	Level generator options: 
+	Level spawn location: World: (-16,64,-248), Chunk: (at 0,4,8 in -1,-16; contains blocks -16,0,-256 to -1,255,-241), Region: (-1,-1; contains chunks -32,-32 to -1,-1, blocks -512,0,-512 to -1,255,-1)
+	Level time: 71667 game time, 71667 day time
+	Level dimension: 0
+	Level storage version: 0x04ABD - Anvil
+	Level weather: Rain time: 69822 (now: false), thunder time: 82922 (now: false)
+	Level game mode: Game mode: creative (ID 1). Hardcore: false. Cheats: true
+Stacktrace:
+	at net.minecraft.server.MinecraftServer.updateTimeLightAndEntities(MinecraftServer.java:836)
+	at net.minecraft.server.MinecraftServer.tick(MinecraftServer.java:740)
+	at net.minecraft.server.integrated.IntegratedServer.tick(IntegratedServer.java:192)
+	at net.minecraft.server.MinecraftServer.run(MinecraftServer.java:589)
+	at java.lang.Thread.run(Thread.java:745)
+
+-- System Details --
+Details:
+	Minecraft Version: 1.12
+	Operating System: Windows 10 (amd64) version 10.0
+	Java Version: 1.8.0_101, Oracle Corporation
+	Java VM Version: Java HotSpot(TM) 64-Bit Server VM (mixed mode), Oracle Corporation
+	Memory: 513338352 bytes (489 MB) / 989331456 bytes (943 MB) up to 1890582528 bytes (1803 MB)
+	JVM Flags: 0 total; 
+	IntCache: cache: 0, tcache: 0, allocated: 13, tallocated: 95
+	FML: MCP 9.40 Powered by Forge 14.21.0.2321 5 mods loaded, 5 mods active
+	States: 'U' = Unloaded 'L' = Loaded 'C' = Constructed 'H' = Pre-initialized 'I' = Initialized 'J' = Post-initialized 'A' = Available 'D' = Disabled 'E' = Errored
+	UCHIJAAAA	minecraft{1.12} [Minecraft] (minecraft.jar) 
+	UCHIJAAAA	mcp{9.19} [Minecraft Coder Pack] (minecraft.jar) 
+	UCHIJAAAA	FML{8.0.99.99} [Forge Mod Loader] (forgeSrc-1.12-14.21.0.2321.jar) 
+	UCHIJAAAA	forge{14.21.0.2321} [Minecraft Forge] (forgeSrc-1.12-14.21.0.2321.jar) 
+	UCHIJAAAA	chromaticengineering{0.01} [Chromatic Engineering] (bin) 
+	Loaded coremods (and transformers): 
+	GL info: ~~ERROR~~ RuntimeException: No OpenGL context found in the current thread.
+	Profiler Position: N/A (disabled)
+	Player Count: 1 / 8; [EntityPlayerMP['Player358'/197, l='New World', x=-15.50, y=66.00, z=-249.13]]
+	Type: Integrated Server (map_client.txt)
+	Is Modded: Definitely; Client brand changed to 'fml,forge'

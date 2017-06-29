@@ -26,6 +26,7 @@ public class CECreativeTab extends CreativeTabs{
 	}
 	
 	private void addBlock(Block block) {
+		ItemStack stack = new ItemStack(block);
 		block.getSubBlocks(this, list);
 	}
 	
@@ -40,6 +41,8 @@ public class CECreativeTab extends CreativeTabs{
 		addItem(ModItems.blockDesignator);
 		addItem(ModItems.chromaDust);
 		addItem(ModItems.darksign);
+		addItem(ModItems.palette);
+		addItem(ModItems.lordvessel);
 		addBlock(ModBlocks.bonfire);
 		addBlock(ModBlocks.esotericShrine);
 		addBlock(ModBlocks.fluidDisplacer);

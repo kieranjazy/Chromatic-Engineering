@@ -1,13 +1,10 @@
 package com.grumpybear.chromeng.block.tile;
 
-import java.util.Random;
-
-import com.grumpybear.chromeng.ChromEng;
-import com.grumpybear.chromeng.chroma.ChromaStorage;
-import com.grumpybear.chromeng.chroma.EnumColour;
-import com.grumpybear.chromeng.chroma.IChromaStorage;
+import com.grumpybear.chromeng.chroma.*;
 import com.grumpybear.chromeng.init.ModItems;
-
+import com.grumpybear.chromeng.item.ItemPalette;
+import com.grumpybear.chromeng.lib.LibNumbers;
+import com.grumpybear.chromeng.util.ItemStackUtil;
 import net.minecraft.init.Items;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.ISidedInventory;
@@ -19,7 +16,11 @@ import net.minecraft.util.math.MathHelper;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-public class TileExtractor extends TileInventory implements ISidedInventory, IChromaStorage{
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Random;
+
+public class TileExtractor extends TileInventory implements ISidedInventory, IChromaStorage, ICharger{
 
 	//Slot 0 - Dust Input
 	//Slot 1 - Fuel
@@ -29,6 +30,10 @@ public class TileExtractor extends TileInventory implements ISidedInventory, ICh
 	private int cookTime;
 	private int currentItemBurnTime;
 	private int totalCookTime;
+
+   private int randInt;
+
+   private ArrayList<EnumColour> colours;
 	
 	public static final int MAX_CHROMA = 1000;
 	
@@ -36,7 +41,9 @@ public class TileExtractor extends TileInventory implements ISidedInventory, ICh
 	
 	public TileExtractor() {
 		chromaStorage = new ChromaStorage(MAX_CHROMA);
-	}
+       randInt = 7;
+       colours = new ArrayList<EnumColour>(Arrays.asList(EnumColour.values()));
+    }
 	
 
 	@Override
@@ -87,7 +94,13 @@ public class TileExtractor extends TileInventory implements ISidedInventory, ICh
 	
 	@Override
 	public void update() {
-		
+
+       // *Charging logic
+
+       tryCharge(4);
+
+		// *Extraction Logic
+
 		boolean flag = this.isBurning();
         boolean flag1 = false;
 
@@ -128,13 +141,13 @@ public class TileExtractor extends TileInventory implements ISidedInventory, ICh
                 if (this.isBurning() && this.canSmelt()) //If burning and can smelt
                 {
                     ++this.cookTime; //Increases cook time
-                    
+
+                    ArrayList<EnumColour> colours= new ArrayList<EnumColour>(Arrays.asList(EnumColour.values()));
                     Random rand = new Random();
-                    EnumColour colour = EnumColour.values()[rand.nextInt(7)];
+                    EnumColour colour = colours.get(rand.nextInt(randInt));
                     
-                    if (chromaStorage.getColour(colour).getCurrentCE() + 5 <= 1000) {
-                    	chromaStorage.getColour(colour).addCurrentCE(5);
-                    	ChromEng.logger.warn(chromaStorage.getColour(colour).getChromaType().toString() + chromaStorage.getColour(colour).getCurrentCE());
+                    if (chromaStorage.getColour(colour).getCurrentCE() + LibNumbers.TRANSFER_RATE < 1005) {
+                    	chromaStorage.getColour(colour).addCurrentCE(LibNumbers.TRANSFER_RATE);
                     }
 
                     if (this.cookTime == this.totalCookTime) //If cook time = totalCookTIme
@@ -165,11 +178,32 @@ public class TileExtractor extends TileInventory implements ISidedInventory, ICh
         {
             this.markDirty();
         }
+
 	}
 	
 	public int getCookTime(ItemStack stack)
     {
         return 300;
+    }
+
+    public void tryCharge(int i) {
+	   ItemStack stack = getStackInSlot(i);
+	   if (stack.getItem() instanceof IChargeableSingle) {
+	      if (this.getChromaStorage().getColour(EnumColour.ORANGE).getCurrentCE() - LibNumbers.TRANSFER_RATE >= 0 && ItemStackUtil.getChromaUnit(stack).getCurrentCE() + LibNumbers.TRANSFER_RATE <= ItemStackUtil.getChromaUnit(stack).getMaxCE()) {
+             ((IChargeableSingle) stack.getItem()).addCE(stack, LibNumbers.TRANSFER_RATE);
+             this.getChromaStorage().getColour(EnumColour.ORANGE).minusCurrentCE(LibNumbers.TRANSFER_RATE);
+          }
+       }
+
+       if (stack.getItem() instanceof IChargeableMulti) {
+	      ItemPalette palette = (ItemPalette) stack.getItem();
+	      for (EnumColour colour : colours) {
+	         if (this.getChromaStorage().getColour(colour).getCurrentCE() - LibNumbers.TRANSFER_RATE >= 0 && palette.getChromaStorage(stack).getColour(colour).getCurrentCE() + LibNumbers.TRANSFER_RATE <= palette.getChromaStorage(stack).getMaxCE()) {
+                palette.addCE(stack, LibNumbers.TRANSFER_RATE, colour);
+                this.getChromaStorage().getColour(colour).minusCurrentCE(LibNumbers.TRANSFER_RATE);
+             }
+          }
+       }
     }
 	
 	public void extractItem()
@@ -221,15 +255,14 @@ public class TileExtractor extends TileInventory implements ISidedInventory, ICh
             {
                 ItemStack itemstack1 = this.getStackInSlot(2);
 
-                if (itemstack1.isEmpty())
+                if (itemstack1.isEmpty() && this.getStackInSlot(0).getItem() == ModItems.chromaDust)
                 {
                     return true;
                 }
                 else if (!itemstack1.isItemEqual(itemstack))
                 {
                     return false;
-                }
-                else if (itemstack1.getCount() + itemstack.getCount() <= this.getInventoryStackLimit() && itemstack1.getCount() + itemstack.getCount() <= itemstack1.getMaxStackSize())  // Forge fix: make furnace respect stack sizes in furnace recipes
+                } else if (itemstack1.getCount() + itemstack.getCount() <= this.getInventoryStackLimit() && itemstack1.getCount() + itemstack.getCount() <= itemstack1.getMaxStackSize())  // Forge fix: make furnace respect stack sizes in furnace recipes
                 {
                     return true;
                 }
@@ -328,7 +361,7 @@ public class TileExtractor extends TileInventory implements ISidedInventory, ICh
 	
 	@Override
 	public int getSizeInventory() {
-		return 4;
+		return 4 + 1;
 	}
 	
 	
@@ -379,4 +412,30 @@ public class TileExtractor extends TileInventory implements ISidedInventory, ICh
 	}
 
 
+   @Override
+   public void addCE(ItemStack stack, int ce, EnumColour theColour) { //Adds CE to a chargeable item and takes that CE from this chroma storage
+      if (stack.getItem() instanceof IChargeableSingle) {
+         IChargeableSingle item = (IChargeableSingle) stack.getItem();
+
+         if (this.getChromaStorage().getColour(item.getColourType()).getCurrentCE() - LibNumbers.TRANSFER_RATE >= 0 && item.getChromaUnit(stack).getCurrentCE() + LibNumbers.TRANSFER_RATE <= item.getChromaUnit(stack).getMaxCE()) {
+            item.addCE(stack, LibNumbers.TRANSFER_RATE);
+            minusCE(stack, LibNumbers.TRANSFER_RATE, item.getColourType());
+         }
+      }
+
+      if (stack.getItem() instanceof IChargeableMulti) {
+         IChargeableMulti item = (IChargeableMulti) stack.getItem();
+         for (EnumColour colour : colours) {
+            if (this.getChromaStorage().getColour(colour).getCurrentCE() - LibNumbers.TRANSFER_RATE >= 0 && item.getChromaStorage(stack).getColour(colour).getCurrentCE() + LibNumbers.TRANSFER_RATE <= item.getChromaStorage(stack).getMaxCE()) {
+               item.addCE(stack, LibNumbers.TRANSFER_RATE, colour);
+               minusCE(stack, ce, colour);
+            }
+         }
+      }
+   }
+
+   @Override
+   public void minusCE(ItemStack stack, int ce, EnumColour colour) {
+      this.getChromaStorage().getColour(colour).minusCurrentCE(ce);
+   }
 }

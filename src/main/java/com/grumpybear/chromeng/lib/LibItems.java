@@ -7,6 +7,8 @@ public class LibItems {
 	public static final String BLOCK_DESIGNATOR = "blockDesignator";
 	public static final String CHROMA_DUST = "chromaDust";
 	public static final String DARKSIGN = "darksign";
+	public static final String PALETTE = "palette";
+	public static final String LORDVESSEL = "lordvessel";
 	
 	public static final String[] DUST_TYPES = new String[] {
 			"dustEffervescent",

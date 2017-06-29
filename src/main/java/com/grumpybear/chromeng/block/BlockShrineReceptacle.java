@@ -1,10 +1,7 @@
 package com.grumpybear.chromeng.block;
 
-import javax.annotation.Nonnull;
-
 import com.grumpybear.chromeng.block.tile.TileReceptacle;
 import com.grumpybear.chromeng.lib.LibBlocks;
-
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
@@ -16,6 +13,8 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.fluids.FluidUtil;
 import net.minecraftforge.fluids.capability.IFluidHandler;
+
+import javax.annotation.Nonnull;
 
 public class BlockShrineReceptacle extends BlockCE {
 
@@ -31,7 +30,7 @@ public class BlockShrineReceptacle extends BlockCE {
 		if (tile instanceof TileReceptacle) {
 			tile = (TileReceptacle) tile;
 			
-			playerIn.setHeldItem(EnumHand.MAIN_HAND, FluidUtil.interactWithFluidHandler(playerIn.getHeldItemMainhand(), (IFluidHandler) tile, playerIn).result);
+			FluidUtil.interactWithFluidHandler(playerIn, hand, (IFluidHandler) tile);
 		}
 		
 		return true;

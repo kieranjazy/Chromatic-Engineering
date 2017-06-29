@@ -1,10 +1,7 @@
 package com.grumpybear.chromeng.block;
 
-import javax.annotation.Nonnull;
-
 import com.grumpybear.chromeng.block.tile.TileShrine;
 import com.grumpybear.chromeng.lib.LibBlocks;
-
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
@@ -18,6 +15,8 @@ import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
+
+import javax.annotation.Nonnull;
 
 public class BlockEsotericShrine extends BlockCE {
 	
@@ -69,7 +68,7 @@ public class BlockEsotericShrine extends BlockCE {
 	public TileEntity createTileEntity(@Nonnull World world, @Nonnull IBlockState state) {
 		return new TileShrine();
 	}
-	
+
 	@Override
 	public boolean isOpaqueCube(IBlockState state) {
 		return false;

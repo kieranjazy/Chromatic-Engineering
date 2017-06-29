@@ -5,41 +5,58 @@ import com.grumpybear.chromeng.block.BlockChromaOre;
 import com.grumpybear.chromeng.block.BlockEsotericShrine;
 import com.grumpybear.chromeng.block.BlockShrineReceptacle;
 import com.grumpybear.chromeng.block.chroma.BlockChromaticExtractor;
-import com.grumpybear.chromeng.block.tile.TileBonfire;
-import com.grumpybear.chromeng.block.tile.TileDisplacer;
-import com.grumpybear.chromeng.block.tile.TileEnergiser;
-import com.grumpybear.chromeng.block.tile.TileExtractor;
-import com.grumpybear.chromeng.block.tile.TileReceptacle;
-import com.grumpybear.chromeng.block.tile.TileShrine;
+import com.grumpybear.chromeng.block.tile.*;
 import com.grumpybear.chromeng.block.workonlater.BlockEnergiser;
 import com.grumpybear.chromeng.block.workonlater.BlockFluidDisplacer;
 import com.grumpybear.chromeng.lib.LibBlocks;
 import com.grumpybear.chromeng.lib.LibMain;
-
 import net.minecraft.block.Block;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemBlock;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraftforge.event.RegistryEvent;
+import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.registry.GameRegistry;
+import net.minecraftforge.registries.IForgeRegistry;
 
+@Mod.EventBusSubscriber
 public class ModBlocks {
-	public static Block esotericShrine;
-	public static Block fluidDisplacer;
-	public static Block shrineReceptacle;
-	public static Block energiser;
-	public static Block chromaOre;
-	public static Block extractor;
-	public static Block bonfire;
-	
-	public static void init() {
-		esotericShrine = new BlockEsotericShrine();
-		fluidDisplacer = new BlockFluidDisplacer();
-		shrineReceptacle = new BlockShrineReceptacle();
-		energiser = new BlockEnergiser();
-		chromaOre = new BlockChromaOre();
-		extractor = new BlockChromaticExtractor();
-		bonfire = new BlockBonfire();
-		
+	public static Block esotericShrine = new BlockEsotericShrine();
+	public static Block fluidDisplacer = new BlockFluidDisplacer();
+	public static Block shrineReceptacle = new BlockShrineReceptacle();
+	public static Block energiser = new BlockEnergiser();
+	public static Block chromaOre = new BlockChromaOre();
+	public static Block extractor = new BlockChromaticExtractor();
+	public static Block bonfire = new BlockBonfire();
+
+	@SubscribeEvent
+	public static void registerBlocks(RegistryEvent.Register<Block> evt) {
+		IForgeRegistry<Block> registry = evt.getRegistry();
+		registry.register(esotericShrine);
+		registry.register(fluidDisplacer);
+		registry.register(shrineReceptacle);
+		registry.register(energiser);
+		registry.register(chromaOre);
+		registry.register(extractor);
+		registry.register(bonfire);
+
 		initTileEntities();
 	}
+
+	@SubscribeEvent
+	public static void registerItemBlocks(RegistryEvent.Register<Item> evt) {
+		IForgeRegistry<Item> registry = evt.getRegistry();
+
+		registry.register(new ItemBlock(esotericShrine).setRegistryName(esotericShrine.getRegistryName()));
+		registry.register(new ItemBlock(fluidDisplacer).setRegistryName(fluidDisplacer.getRegistryName()));
+		registry.register(new ItemBlock(shrineReceptacle).setRegistryName(shrineReceptacle.getRegistryName()));
+		registry.register(new ItemBlock(energiser).setRegistryName(energiser.getRegistryName()));
+		registry.register(new ItemBlock(chromaOre).setRegistryName(chromaOre.getRegistryName()));
+		registry.register(new ItemBlock(extractor).setRegistryName(extractor.getRegistryName()));
+		registry.register(new ItemBlock(bonfire).setRegistryName(bonfire.getRegistryName()));
+	}
+
 	
 	public static void initTileEntities() {
 		registerTile(TileShrine.class, LibBlocks.ESOTERIC_SHRINE);

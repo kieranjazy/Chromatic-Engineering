@@ -1,14 +1,8 @@
 package com.grumpybear.chromeng.gui.container.chroma;
 
 import com.grumpybear.chromeng.block.tile.TileExtractor;
-import com.grumpybear.chromeng.chroma.IChromaStorage;
-
 import net.minecraft.entity.player.InventoryPlayer;
-import net.minecraft.inventory.IContainerListener;
-import net.minecraft.inventory.IInventory;
-import net.minecraft.inventory.Slot;
-import net.minecraft.inventory.SlotFurnaceFuel;
-import net.minecraft.inventory.SlotFurnaceOutput;
+import net.minecraft.inventory.*;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
@@ -21,7 +15,7 @@ public class ContainerExtractor extends ContainerChroma{
     private int currentItemBurnTime;
 	
 	public ContainerExtractor(IInventory playerInv, TileEntity tile) {
-		super(playerInv, (IChromaStorage) tile);
+		super(playerInv, tile);
 		
 		myTile = (TileExtractor) tile;
 

@@ -1,0 +1,80 @@
+---- Minecraft Crash Report ----
+// Why did you do that?
+
+Time: 6/9/17 9:58 AM
+Description: Ticking block entity
+
+java.lang.NullPointerException: Ticking block entity
+	at com.grumpybear.chromeng.block.tile.TileEnergiser.update(TileEnergiser.java:51)
+	at net.minecraft.world.World.updateEntities(World.java:1949)
+	at net.minecraft.world.WorldServer.updateEntities(WorldServer.java:648)
+	at net.minecraft.server.MinecraftServer.updateTimeLightAndEntities(MinecraftServer.java:795)
+	at net.minecraft.server.MinecraftServer.tick(MinecraftServer.java:699)
+	at net.minecraft.server.integrated.IntegratedServer.tick(IntegratedServer.java:156)
+	at net.minecraft.server.MinecraftServer.run(MinecraftServer.java:548)
+	at java.lang.Thread.run(Thread.java:745)
+
+
+A detailed walkthrough of the error, its code path and all known details is as follows:
+---------------------------------------------------------------------------------------
+
+-- Head --
+Thread: Server thread
+Stacktrace:
+	at com.grumpybear.chromeng.block.tile.TileEnergiser.update(TileEnergiser.java:51)
+
+-- Block entity being ticked --
+Details:
+	Name: chromaticengineering:energiser // com.grumpybear.chromeng.block.tile.TileEnergiser
+	Block type: ID #240 (tile.energiser // com.grumpybear.chromeng.block.BlockEnergiser)
+	Block data value: 0 / 0x0 / 0b0000
+	Block location: World: (-35,71,152), Chunk: (at 13,4,8 in -3,9; contains blocks -48,0,144 to -33,255,159), Region: (-1,0; contains chunks -32,0 to -1,31, blocks -512,0,0 to -1,255,511)
+	Actual block type: ID #240 (tile.energiser // com.grumpybear.chromeng.block.BlockEnergiser)
+	Actual block data value: 0 / 0x0 / 0b0000
+Stacktrace:
+	at net.minecraft.world.World.updateEntities(World.java:1949)
+	at net.minecraft.world.WorldServer.updateEntities(WorldServer.java:648)
+
+-- Affected level --
+Details:
+	Level name: New World
+	All players: 0 total; []
+	Chunk stats: ServerChunkCache: 625 Drop: 0
+	Level seed: 9108022961447628620
+	Level generator: ID 00 - default, ver 1. Features enabled: true
+	Level generator options: 
+	Level spawn location: World: (-116,64,220), Chunk: (at 12,4,12 in -8,13; contains blocks -128,0,208 to -113,255,223), Region: (-1,0; contains chunks -32,0 to -1,31, blocks -512,0,0 to -1,255,511)
+	Level time: 203005 game time, 203005 day time
+	Level dimension: 0
+	Level storage version: 0x04ABD - Anvil
+	Level weather: Rain time: 7114 (now: true), thunder time: 109018 (now: false)
+	Level game mode: Game mode: creative (ID 1). Hardcore: false. Cheats: true
+Stacktrace:
+	at net.minecraft.server.MinecraftServer.updateTimeLightAndEntities(MinecraftServer.java:795)
+	at net.minecraft.server.MinecraftServer.tick(MinecraftServer.java:699)
+	at net.minecraft.server.integrated.IntegratedServer.tick(IntegratedServer.java:156)
+	at net.minecraft.server.MinecraftServer.run(MinecraftServer.java:548)
+	at java.lang.Thread.run(Thread.java:745)
+
+-- System Details --
+Details:
+	Minecraft Version: 1.11.2
+	Operating System: Windows 10 (amd64) version 10.0
+	Java Version: 1.8.0_101, Oracle Corporation
+	Java VM Version: Java HotSpot(TM) 64-Bit Server VM (mixed mode), Oracle Corporation
+	Memory: 78561688 bytes (74 MB) / 805306368 bytes (768 MB) up to 1890582528 bytes (1803 MB)
+	JVM Flags: 0 total; 
+	IntCache: cache: 0, tcache: 0, allocated: 12, tallocated: 94
+	FML: MCP 9.38 Powered by Forge 13.20.0.2228 5 mods loaded, 5 mods active
+	States: 'U' = Unloaded 'L' = Loaded 'C' = Constructed 'H' = Pre-initialized 'I' = Initialized 'J' = Post-initialized 'A' = Available 'D' = Disabled 'E' = Errored
+	UCHIJAAAA	minecraft{1.11.2} [Minecraft] (minecraft.jar) 
+	UCHIJAAAA	mcp{9.19} [Minecraft Coder Pack] (minecraft.jar) 
+	UCHIJAAAA	FML{8.0.99.99} [Forge Mod Loader] (forgeSrc-1.11.2-13.20.0.2228.jar) 
+	UCHIJAAAA	forge{13.20.0.2228} [Minecraft Forge] (forgeSrc-1.11.2-13.20.0.2228.jar) 
+	UCHIJAAAA	chromaticengineering{0.01} [Chromatic Engineering] (bin) 
+	Loaded coremods (and transformers): 
+	GL info: ~~ERROR~~ RuntimeException: No OpenGL context found in the current thread.
+	Profiler Position: N/A (disabled)
+	Player Count: 0 / 8; []
+	Type: Integrated Server (map_client.txt)
+	Is Modded: Definitely; Client brand changed to 'fml,forge'

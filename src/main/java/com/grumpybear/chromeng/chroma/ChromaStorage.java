@@ -104,4 +104,35 @@ public class ChromaStorage {
 			unit.readFromNBT(nbt);
 		}
 	}
+
+	public static ChromaStorage storageFromNBT(NBTTagCompound nbt) {
+		ChromaStorage temp = new ChromaStorage(1000);
+		if (nbt.hasNoTags()) {
+			return temp;
+		}
+
+
+		for (ChromaUnit unit : temp.getChromaUnits()) {
+			unit.readFromNBT(nbt);
+		}
+
+		return temp; //Returns an accurate ChromaStorage with 10CE
+	}
+
+	public static void storageToNBT(ChromaStorage storage, NBTTagCompound nbt) {
+
+		for (ChromaUnit unit : storage.getChromaUnits()) {
+			unit.writeToNBT(nbt);
+		}
+		nbt.setBoolean("Empty", storage.isEmpty());
+	}
+
+	public boolean isEmpty() {
+		for (ChromaUnit unit : getChromaUnits()) {
+			if (!unit.isEmpty()) {
+				return false;
+			}
+		}
+		return true;
+	}
 }

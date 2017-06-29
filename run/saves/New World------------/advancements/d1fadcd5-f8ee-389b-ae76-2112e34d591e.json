@@ -1,0 +1,10 @@
+{
+  "minecraft:adventure/adventuring_time": {
+    "criteria": {
+      "beaches": "2017-06-19 14:29:04 +0100",
+      "plains": "2017-06-19 14:29:08 +0100",
+      "roofed_forest": "2017-06-19 14:28:52 +0100"
+    },
+    "done": false
+  }
+}

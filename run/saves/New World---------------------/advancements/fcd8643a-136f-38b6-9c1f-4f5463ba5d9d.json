@@ -1,0 +1,12 @@
+{
+  "minecraft:adventure/adventuring_time": {
+    "criteria": {
+      "forest_hills": "2017-06-24 20:15:04 +0100",
+      "plains": "2017-06-24 20:14:13 +0100",
+      "extreme_hills": "2017-06-24 20:15:16 +0100",
+      "river": "2017-06-24 20:15:11 +0100",
+      "jungle": "2017-06-24 20:15:25 +0100"
+    },
+    "done": false
+  }
+}

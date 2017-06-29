@@ -1,13 +1,9 @@
 package com.grumpybear.chromeng.block;
 
-import javax.annotation.Nonnull;
-
-import com.grumpybear.chromeng.ChromEng;
 import com.grumpybear.chromeng.block.tile.TileBonfire;
 import com.grumpybear.chromeng.init.ModItems;
 import com.grumpybear.chromeng.item.ItemDarksign;
 import com.grumpybear.chromeng.lib.LibBlocks;
-
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
@@ -22,13 +18,17 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
+import javax.annotation.Nonnull;
+
 public class BlockBonfire extends BlockCE{
 	
 
 	public BlockBonfire() {
 		super(Material.ROCK, LibBlocks.BONFIRE);
 	}
-	
+
+
+	@SuppressWarnings("Deprecated")
 	@Override
 	public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos) {
 		return FULL_BLOCK_AABB;
@@ -54,7 +54,7 @@ public class BlockBonfire extends BlockCE{
 			}
 		} else if (playerIn.getHeldItem(EnumHand.MAIN_HAND).getItem() == ModItems.darksign) {
 			if (worldIn.getTileEntity(pos) instanceof TileBonfire) {
-				((ItemDarksign) playerIn.getHeldItemMainhand().getItem()).linkBonfire((TileBonfire) worldIn.getTileEntity(pos), playerIn.getHeldItemMainhand());
+				((ItemDarksign) playerIn.getHeldItemMainhand().getItem()).linkBonfire((TileBonfire) worldIn.getTileEntity(pos), playerIn.getHeldItemMainhand(), playerIn, worldIn);
 			}
 		}
 		

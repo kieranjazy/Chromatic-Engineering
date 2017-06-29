@@ -1,7 +1,6 @@
 package com.grumpybear.chromeng.chroma;
 
 import com.grumpybear.chromeng.util.EnumColourUtil;
-
 import net.minecraft.nbt.NBTTagCompound;
 
 public class ChromaUnit {
@@ -34,7 +33,13 @@ public class ChromaUnit {
 	}
 	
 	public void addCurrentCE(int currentCE) {
-		this.currentCE += currentCE;
+		if (this.currentCE + currentCE <= this.maxCE)
+			this.currentCE += currentCE;
+	}
+
+	public void minusCurrentCE(int currentCE) {
+		if (this.currentCE - currentCE >= 0)
+			this.currentCE -= currentCE;
 	}
 	
 	public NBTTagCompound writeToNBT(NBTTagCompound nbt) {
@@ -50,9 +55,17 @@ public class ChromaUnit {
 	public void readFromNBT(NBTTagCompound nbt) {
 		String temp = EnumColourUtil.colourToString(chromaType);
 		
-		currentCE = nbt.getInteger("Current" + temp);
-		maxCE = nbt.getInteger("Max" + temp);
-		chromaType = EnumColourUtil.byteToColour(nbt.getByte("Colour" + temp));
+		this.currentCE = nbt.getInteger("Current" + temp);
+		this.maxCE = nbt.getInteger("Max" + temp);
+		this.chromaType = EnumColourUtil.byteToColour(nbt.getByte("Colour" + temp));
+	}
+
+	public boolean isEmpty() {
+		if (this.currentCE == 0) {
+			return true;
+		}
+
+		return false;
 	}
 	
 	public void setCurrentCE(int currentCE) {

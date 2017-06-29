@@ -4,12 +4,10 @@ import com.grumpybear.chromeng.handler.CECreativeTab;
 import com.grumpybear.chromeng.handler.ModelHandler;
 import com.grumpybear.chromeng.lib.LibMain;
 import com.grumpybear.chromeng.render.IModelRegister;
-
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.item.Item;
 import net.minecraft.util.ResourceLocation;
-import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
@@ -23,7 +21,7 @@ public class BlockCE extends Block implements IModelRegister {
 		setDefaultState(blockState.getBaseState());
 		setRegistryName(new ResourceLocation(LibMain.MOD_ID, name));
 		setHardness(4);
-		GameRegistry.register(this);
+		//GameRegistry.register(this);
 		setCreativeTab(CECreativeTab.INSTANCE);
 		registerItemForm();
 	}
@@ -31,7 +29,7 @@ public class BlockCE extends Block implements IModelRegister {
 
 	
 	public void registerItemForm() {
-		GameRegistry.register(new ItemBlockCE(this), getRegistryName());
+		//GameRegistry.register(new ItemBlockCE(this), getRegistryName());
 	}
 
 

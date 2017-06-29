@@ -1,11 +1,13 @@
 package com.grumpybear.chromeng.gui.container.chroma;
 
+import com.grumpybear.chromeng.block.tile.TileCE;
 import com.grumpybear.chromeng.block.tile.TileExtractor;
 import com.grumpybear.chromeng.chroma.IChromaStorage;
 import com.grumpybear.chromeng.gui.container.ContainerCE;
-
+import com.grumpybear.chromeng.gui.slot.SlotEnergyOutput;
 import net.minecraft.inventory.IContainerListener;
 import net.minecraft.inventory.IInventory;
+import net.minecraft.tileentity.TileEntity;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
@@ -20,9 +22,14 @@ public class ContainerChroma extends ContainerCE{
 	private int current6;
 	private int current7;
 
-	public ContainerChroma(IInventory playerInv, IChromaStorage chromaHandler) {
-		super(playerInv);
-		this.chromaHandler = chromaHandler;
+	public ContainerChroma(IInventory playerInv, TileEntity chromaHandler) {
+		super(playerInv, (TileCE) chromaHandler);
+		this.chromaHandler = (IChromaStorage) chromaHandler;
+
+		TileExtractor tile = (TileExtractor) chromaHandler;
+
+		addSlotToContainer(new SlotEnergyOutput(tile, 4, 180, 116));
+
 	}
 	
 	@Override

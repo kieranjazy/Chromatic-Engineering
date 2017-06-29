@@ -1,0 +1,9 @@
+{
+  "minecraft:adventure/adventuring_time": {
+    "criteria": {
+      "redwood_taiga": "2017-06-16 00:06:42 +0100",
+      "redwood_taiga_hills": "2017-06-16 00:06:54 +0100"
+    },
+    "done": false
+  }
+}

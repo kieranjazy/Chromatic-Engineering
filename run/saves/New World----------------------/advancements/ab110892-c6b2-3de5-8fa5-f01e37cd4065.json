@@ -1,0 +1,14 @@
+{
+  "minecraft:recipes/building_blocks/coal_block": {
+    "criteria": {
+      "has_at_least_9_coal": "2017-06-26 12:00:40 +0100"
+    },
+    "done": true
+  },
+  "minecraft:adventure/adventuring_time": {
+    "criteria": {
+      "forest": "2017-06-26 12:00:40 +0100"
+    },
+    "done": false
+  }
+}
