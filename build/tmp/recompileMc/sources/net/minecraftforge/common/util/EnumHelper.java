@@ -25,6 +25,7 @@ import java.util.*;
 import com.google.common.base.Predicate;
 import com.google.common.collect.Lists;
 
+import net.minecraft.entity.passive.IAnimals;
 import net.minecraftforge.fml.common.EnhancedRuntimeException;
 import net.minecraftforge.fml.common.FMLLog;
 import net.minecraft.block.BlockPressurePlate.Sensitivity;
@@ -98,7 +99,7 @@ public class EnumHelper
         return addEnum(EnumCreatureAttribute.class, name);
     }
     @Nullable
-    public static EnumCreatureType addCreatureType(String name, Class<?> typeClass, int maxNumber, Material material, boolean peaceful, boolean animal)
+    public static EnumCreatureType addCreatureType(String name, Class<? extends IAnimals> typeClass, int maxNumber, Material material, boolean peaceful, boolean animal)
     {
         return addEnum(EnumCreatureType.class, name, typeClass, maxNumber, material, peaceful, animal);
     }
@@ -161,7 +162,7 @@ public class EnumHelper
         }
         catch (Exception e)
         {
-            e.printStackTrace();
+            FMLLog.log.error("Error setting up EnumHelper.", e);
         }
 
         isSetup = true;
@@ -387,8 +388,8 @@ public class EnumHelper
         }
         catch (Exception e)
         {
-            e.printStackTrace();
-            throw new RuntimeException(e.getMessage(), e);
+            FMLLog.log.error("Error adding enum with EnumHelper.", e);
+            throw new RuntimeException(e);
         }
     }
 

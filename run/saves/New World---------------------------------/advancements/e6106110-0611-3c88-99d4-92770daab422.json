@@ -1,0 +1,11 @@
+{
+  "minecraft:adventure/adventuring_time": {
+    "criteria": {
+      "forest": "2017-07-12 22:40:49 +0100",
+      "forest_hills": "2017-07-12 22:38:46 +0100",
+      "taiga": "2017-07-12 22:40:52 +0100",
+      "taiga_hills": "2017-07-12 22:40:58 +0100"
+    },
+    "done": false
+  }
+}

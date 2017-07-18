@@ -771,8 +771,9 @@ public class GuiContainerCreative extends InventoryEffectRenderer
                 }
             }
 
+            net.minecraft.client.gui.FontRenderer font = stack.getItem().getFontRenderer(stack);
             net.minecraftforge.fml.client.config.GuiUtils.preItemToolTip(stack);
-            this.drawHoveringText(list, x, y);
+            this.drawHoveringText(list, x, y, (font == null ? fontRendererObj : font));
             net.minecraftforge.fml.client.config.GuiUtils.postItemToolTip();
         }
         else

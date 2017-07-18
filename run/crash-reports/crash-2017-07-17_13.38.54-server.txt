@@ -1,0 +1,89 @@
+---- Minecraft Crash Report ----
+// Quite honestly, I wouldn't worry myself about that.
+
+Time: 7/17/17 1:38 PM
+Description: Ticking player
+
+java.lang.NoSuchMethodError: com.grumpybear.chromeng.item.ItemDarksign.minusCE(Lnet/minecraft/item/ItemStack;I)V
+	at com.grumpybear.chromeng.item.ItemDarksign.onItemUseFinish(ItemDarksign.java:49)
+	at net.minecraft.item.ItemStack.onItemUseFinish(ItemStack.java:242)
+	at net.minecraft.entity.EntityLivingBase.onItemUseFinish(EntityLivingBase.java:3034)
+	at net.minecraft.entity.player.EntityPlayerMP.onItemUseFinish(EntityPlayerMP.java:1225)
+	at net.minecraft.entity.EntityLivingBase.updateActiveHand(EntityLivingBase.java:2928)
+	at net.minecraft.entity.EntityLivingBase.onUpdate(EntityLivingBase.java:2287)
+	at net.minecraft.entity.player.EntityPlayer.onUpdate(EntityPlayer.java:258)
+	at net.minecraft.entity.player.EntityPlayerMP.onUpdateEntity(EntityPlayerMP.java:424)
+	at net.minecraft.network.NetHandlerPlayServer.update(NetHandlerPlayServer.java:183)
+	at net.minecraftforge.fml.common.network.handshake.NetworkDispatcher$1.update(NetworkDispatcher.java:214)
+	at net.minecraft.network.NetworkManager.processReceivedPackets(NetworkManager.java:307)
+	at net.minecraft.network.NetworkSystem.networkTick(NetworkSystem.java:196)
+	at net.minecraft.server.MinecraftServer.updateTimeLightAndEntities(MinecraftServer.java:859)
+	at net.minecraft.server.MinecraftServer.tick(MinecraftServer.java:740)
+	at net.minecraft.server.integrated.IntegratedServer.tick(IntegratedServer.java:192)
+	at net.minecraft.server.MinecraftServer.run(MinecraftServer.java:589)
+	at java.lang.Thread.run(Thread.java:745)
+
+
+A detailed walkthrough of the error, its code path and all known details is as follows:
+---------------------------------------------------------------------------------------
+
+-- Head --
+Thread: Server thread
+Stacktrace:
+	at com.grumpybear.chromeng.item.ItemDarksign.onItemUseFinish(ItemDarksign.java:49)
+	at net.minecraft.item.ItemStack.onItemUseFinish(ItemStack.java:242)
+	at net.minecraft.entity.EntityLivingBase.onItemUseFinish(EntityLivingBase.java:3034)
+	at net.minecraft.entity.player.EntityPlayerMP.onItemUseFinish(EntityPlayerMP.java:1225)
+	at net.minecraft.entity.EntityLivingBase.updateActiveHand(EntityLivingBase.java:2928)
+	at net.minecraft.entity.EntityLivingBase.onUpdate(EntityLivingBase.java:2287)
+	at net.minecraft.entity.player.EntityPlayer.onUpdate(EntityPlayer.java:258)
+
+-- Player being ticked --
+Details:
+	Entity Type: null (net.minecraft.entity.player.EntityPlayerMP)
+	Entity ID: 290
+	Entity Name: Player913
+	Entity's Exact location: -93.00, 70.00, 474.00
+	Entity's Block location: World: (-93,70,474), Chunk: (at 3,4,10 in -6,29; contains blocks -96,0,464 to -81,255,479), Region: (-1,0; contains chunks -32,0 to -1,31, blocks -512,0,0 to -1,255,511)
+	Entity's Momentum: 0.00, -0.08, 0.00
+	Entity's Passengers: []
+	Entity's Vehicle: ~~ERROR~~ NullPointerException: null
+Stacktrace:
+	at net.minecraft.entity.player.EntityPlayerMP.onUpdateEntity(EntityPlayerMP.java:424)
+	at net.minecraft.network.NetHandlerPlayServer.update(NetHandlerPlayServer.java:183)
+	at net.minecraftforge.fml.common.network.handshake.NetworkDispatcher$1.update(NetworkDispatcher.java:214)
+	at net.minecraft.network.NetworkManager.processReceivedPackets(NetworkManager.java:307)
+
+-- Ticking connection --
+Details:
+	Connection: net.minecraft.network.NetworkManager@69bdf5e7
+Stacktrace:
+	at net.minecraft.network.NetworkSystem.networkTick(NetworkSystem.java:196)
+	at net.minecraft.server.MinecraftServer.updateTimeLightAndEntities(MinecraftServer.java:859)
+	at net.minecraft.server.MinecraftServer.tick(MinecraftServer.java:740)
+	at net.minecraft.server.integrated.IntegratedServer.tick(IntegratedServer.java:192)
+	at net.minecraft.server.MinecraftServer.run(MinecraftServer.java:589)
+	at java.lang.Thread.run(Thread.java:745)
+
+-- System Details --
+Details:
+	Minecraft Version: 1.12
+	Operating System: Windows 10 (amd64) version 10.0
+	Java Version: 1.8.0_101, Oracle Corporation
+	Java VM Version: Java HotSpot(TM) 64-Bit Server VM (mixed mode), Oracle Corporation
+	Memory: 553453232 bytes (527 MB) / 1135607808 bytes (1083 MB) up to 1890582528 bytes (1803 MB)
+	JVM Flags: 0 total; 
+	IntCache: cache: 1, tcache: 1, allocated: 12, tallocated: 94
+	FML: MCP 9.40 Powered by Forge 14.21.1.2407 5 mods loaded, 5 mods active
+	States: 'U' = Unloaded 'L' = Loaded 'C' = Constructed 'H' = Pre-initialized 'I' = Initialized 'J' = Post-initialized 'A' = Available 'D' = Disabled 'E' = Errored
+	UCHIJAAAA	minecraft{1.12} [Minecraft] (minecraft.jar) 
+	UCHIJAAAA	mcp{9.19} [Minecraft Coder Pack] (minecraft.jar) 
+	UCHIJAAAA	FML{8.0.99.99} [Forge Mod Loader] (forgeSrc-1.12-14.21.1.2407.jar) 
+	UCHIJAAAA	forge{14.21.1.2407} [Minecraft Forge] (forgeSrc-1.12-14.21.1.2407.jar) 
+	UCHIJAAAA	chromaticengineering{0.01} [Chromatic Engineering] (Chromatic_Engineering_main) 
+	Loaded coremods (and transformers): 
+	GL info: ~~ERROR~~ RuntimeException: No OpenGL context found in the current thread.
+	Profiler Position: N/A (disabled)
+	Player Count: 1 / 8; [EntityPlayerMP['Player913'/290, l='New World', x=-93.00, y=70.00, z=474.00]]
+	Type: Integrated Server (map_client.txt)
+	Is Modded: Definitely; Client brand changed to 'fml,forge'

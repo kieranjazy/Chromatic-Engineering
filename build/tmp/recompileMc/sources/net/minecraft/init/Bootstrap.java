@@ -566,6 +566,7 @@ public class Bootstrap
         if (!alreadyRegistered)
         {
             alreadyRegistered = true;
+            if (false) // skip redirectOutputToLog, Forge already redirects stdout and stderr output to log so that they print with more context
             redirectOutputToLog();
             SoundEvent.registerSounds();
             Block.registerBlocks();

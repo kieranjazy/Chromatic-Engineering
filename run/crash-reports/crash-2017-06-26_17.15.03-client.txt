@@ -5,9 +5,9 @@ Time: 6/26/17 5:15 PM
 Description: Rendering screen
 
 java.lang.ArithmeticException: / by zero
-	at com.grumpybear.chromeng.gui.element.GuiChroma.getYModifier(GuiChroma.java:53)
-	at com.grumpybear.chromeng.gui.element.GuiChroma.chromaHandlerLogic(GuiChroma.java:44)
-	at com.grumpybear.chromeng.gui.element.GuiChroma.drawGuiContainerBackgroundLayer(GuiChroma.java:25)
+	at com.grumpybear.chromeng.gui.chroma.GuiChroma.getYModifier(GuiChroma.java:53)
+	at com.grumpybear.chromeng.gui.chroma.GuiChroma.chromaHandlerLogic(GuiChroma.java:44)
+	at com.grumpybear.chromeng.gui.chroma.GuiChroma.drawGuiContainerBackgroundLayer(GuiChroma.java:25)
 	at com.grumpybear.chromeng.gui.chroma.GuiExtractor.drawGuiContainerBackgroundLayer(GuiExtractor.java:27)
 	at net.minecraft.client.gui.inventory.GuiContainer.drawScreen(GuiContainer.java:93)
 	at net.minecraftforge.client.ForgeHooksClient.drawScreen(ForgeHooksClient.java:382)
@@ -35,9 +35,9 @@ A detailed walkthrough of the error, its code path and all known details is as f
 -- Head --
 Thread: Client thread
 Stacktrace:
-	at com.grumpybear.chromeng.gui.element.GuiChroma.getYModifier(GuiChroma.java:53)
-	at com.grumpybear.chromeng.gui.element.GuiChroma.chromaHandlerLogic(GuiChroma.java:44)
-	at com.grumpybear.chromeng.gui.element.GuiChroma.drawGuiContainerBackgroundLayer(GuiChroma.java:25)
+	at com.grumpybear.chromeng.gui.chroma.GuiChroma.getYModifier(GuiChroma.java:53)
+	at com.grumpybear.chromeng.gui.chroma.GuiChroma.chromaHandlerLogic(GuiChroma.java:44)
+	at com.grumpybear.chromeng.gui.chroma.GuiChroma.drawGuiContainerBackgroundLayer(GuiChroma.java:25)
 	at com.grumpybear.chromeng.gui.chroma.GuiExtractor.drawGuiContainerBackgroundLayer(GuiExtractor.java:27)
 	at net.minecraft.client.gui.inventory.GuiContainer.drawScreen(GuiContainer.java:93)
 	at net.minecraftforge.client.ForgeHooksClient.drawScreen(ForgeHooksClient.java:382)

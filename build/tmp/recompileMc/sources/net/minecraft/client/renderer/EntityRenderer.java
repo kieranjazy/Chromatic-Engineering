@@ -1838,29 +1838,16 @@ public class EntityRenderer implements IResourceManagerReloadListener
             this.fogColorGreen = (float)vec3d3.yCoord;
             this.fogColorBlue = (float)vec3d3.zCoord;
         }
-        else if (iblockstate.getMaterial() == Material.WATER)
+        else
         {
-            float f12 = 0.0F;
-
-            if (entity instanceof EntityLivingBase)
-            {
-                f12 = (float)EnchantmentHelper.getRespirationModifier((EntityLivingBase)entity) * 0.2F;
-
-                if (((EntityLivingBase)entity).isPotionActive(MobEffects.WATER_BREATHING))
-                {
-                    f12 = f12 * 0.3F + 0.6F;
-                }
-            }
-
-            this.fogColorRed = 0.02F + f12;
-            this.fogColorGreen = 0.02F + f12;
-            this.fogColorBlue = 0.2F + f12;
-        }
-        else if (iblockstate.getMaterial() == Material.LAVA)
-        {
-            this.fogColorRed = 0.6F;
-            this.fogColorGreen = 0.1F;
-            this.fogColorBlue = 0.0F;
+            //Forge Moved to Block.
+            Vec3d viewport = ActiveRenderInfo.projectViewFromEntity(entity, partialTicks);
+            BlockPos viewportPos = new BlockPos(viewport);
+            IBlockState viewportState = this.mc.world.getBlockState(viewportPos);
+            Vec3d inMaterialColor = viewportState.getBlock().getFogColor(this.mc.world, viewportPos, viewportState, entity, new Vec3d(fogColorRed, fogColorGreen, fogColorBlue), partialTicks);
+            this.fogColorRed = (float)inMaterialColor.xCoord;
+            this.fogColorGreen = (float)inMaterialColor.yCoord;
+            this.fogColorBlue = (float)inMaterialColor.zCoord;
         }
 
         float f13 = this.fogColor2 + (this.fogColor1 - this.fogColor2) * partialTicks;

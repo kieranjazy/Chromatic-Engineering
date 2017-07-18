@@ -28,7 +28,7 @@ public class ContainerChroma extends ContainerCE{
 
 		TileExtractor tile = (TileExtractor) chromaHandler;
 
-		addSlotToContainer(new SlotEnergyOutput(tile, 4, 180, 116));
+		addSlotToContainer(new SlotEnergyOutput(tile, 4, 179, 116));
 
 	}
 	

@@ -1,9 +1,6 @@
 package com.grumpybear.chromeng.init;
 
-import com.grumpybear.chromeng.item.ItemChromaDust;
-import com.grumpybear.chromeng.item.ItemDarksign;
-import com.grumpybear.chromeng.item.ItemLordvessel;
-import com.grumpybear.chromeng.item.ItemPalette;
+import com.grumpybear.chromeng.item.*;
 import com.grumpybear.chromeng.item.workonlater.ItemBlockDesignator;
 import com.grumpybear.chromeng.item.workonlater.ItemLocationCard;
 import net.minecraft.item.Item;
@@ -20,6 +17,7 @@ public class ModItems {
 	public static Item darksign = new ItemDarksign();
 	public static Item palette = new ItemPalette();
 	public static Item lordvessel = new ItemLordvessel();
+	public static Item extensionConduit = new ItemExtensionConduit();
 	
 	@SubscribeEvent
 	public static void registerItems(RegistryEvent.Register<Item> evt) {
@@ -30,5 +28,6 @@ public class ModItems {
 		registry.register(darksign);
 		registry.register(palette);
 		registry.register(lordvessel);
+		registry.register(extensionConduit);
 	}
 }

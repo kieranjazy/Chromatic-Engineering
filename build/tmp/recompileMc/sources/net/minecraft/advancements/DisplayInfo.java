@@ -132,7 +132,9 @@ public class DisplayInfo
         {
             Item item = JsonUtils.getItem(p_193221_0_, "item");
             int i = JsonUtils.getInt(p_193221_0_, "data", 0);
-            return new ItemStack(item, 1, i);
+            ItemStack ret = new ItemStack(item, 1, i);
+            ret.setTagCompound(net.minecraftforge.common.util.JsonUtils.readNBT(p_193221_0_, "nbt"));
+            return ret;
         }
     }
 

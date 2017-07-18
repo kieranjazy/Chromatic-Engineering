@@ -488,4 +488,29 @@ public abstract class BlockLiquid extends Block
     {
         return BlockFaceShape.UNDEFINED;
     }
+
+    @Override
+    @SideOnly (Side.CLIENT)
+    public Vec3d getFogColor(World world, BlockPos pos, IBlockState state, Entity entity, Vec3d originalColor, float partialTicks)
+    {
+        Vec3d viewport = net.minecraft.client.renderer.ActiveRenderInfo.projectViewFromEntity(entity, partialTicks);
+
+        if (state.getMaterial().isLiquid())
+        {
+            float height = 0.0F;
+            if (state.getBlock() instanceof BlockLiquid)
+            {
+                height = getLiquidHeightPercent(state.getValue(LEVEL)) - 0.11111111F;
+            }
+            float f1 = (float) (pos.getY() + 1) - height;
+            if (viewport.yCoord > (double)f1)
+            {
+                BlockPos upPos = pos.up();
+                IBlockState upState = world.getBlockState(upPos);
+                return upState.getBlock().getFogColor(world, upPos, upState, entity, originalColor, partialTicks);
+            }
+        }
+
+        return super.getFogColor(world, pos, state, entity, originalColor, partialTicks);
+    }
 }

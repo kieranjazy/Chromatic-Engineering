@@ -9,8 +9,8 @@ public class LibTextures {
 	public static final int SIZE_FULL_X = 5;
 	public static final int SIZE_FULL_Y = 101;
 	
-	public static final int CONTAINER_SIZE_X = 79 + 21;
-	public static final int CONTAINER_SIZE_Y = 110 + 24;
+	public static final int CONTAINER_SIZE_X = 79 + 20;
+	public static final int CONTAINER_SIZE_Y = 110 + 26;
 	
 	public static final Pair RED_LOCATION = new Pair(8, 4);
 	public static final Pair ORANGE_LOCATION = new Pair(18, 4);

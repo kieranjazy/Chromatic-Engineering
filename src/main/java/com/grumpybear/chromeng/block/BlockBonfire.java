@@ -1,8 +1,8 @@
 package com.grumpybear.chromeng.block;
 
+import com.grumpybear.chromeng.ChromEng;
 import com.grumpybear.chromeng.block.tile.TileBonfire;
-import com.grumpybear.chromeng.init.ModItems;
-import com.grumpybear.chromeng.item.ItemDarksign;
+import com.grumpybear.chromeng.handler.GuiHandler;
 import com.grumpybear.chromeng.lib.LibBlocks;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.BlockStateContainer;
@@ -52,10 +52,9 @@ public class BlockBonfire extends BlockCE{
 					tile.setBurning(true);
 				}
 			}
-		} else if (playerIn.getHeldItem(EnumHand.MAIN_HAND).getItem() == ModItems.darksign) {
-			if (worldIn.getTileEntity(pos) instanceof TileBonfire) {
-				((ItemDarksign) playerIn.getHeldItemMainhand().getItem()).linkBonfire((TileBonfire) worldIn.getTileEntity(pos), playerIn.getHeldItemMainhand(), playerIn, worldIn);
-			}
+		} else {
+			if (!worldIn.isRemote)
+				playerIn.openGui(ChromEng.instance, GuiHandler.BONFIRE, worldIn, pos.getX(), pos.getY(), pos.getZ());
 		}
 		
 		return true;

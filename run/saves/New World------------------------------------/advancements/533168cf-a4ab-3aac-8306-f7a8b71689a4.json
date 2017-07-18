@@ -1,0 +1,22 @@
+{
+  "minecraft:story/shiny_gear": {
+    "criteria": {
+      "diamond_leggings": "2017-07-17 13:35:44 +0100",
+      "diamond_helmet": "2017-07-17 13:35:44 +0100",
+      "diamond_chestplate": "2017-07-17 13:35:44 +0100"
+    },
+    "done": true
+  },
+  "minecraft:recipes/building_blocks/coal_block": {
+    "criteria": {
+      "has_at_least_9_coal": "2017-07-17 13:36:39 +0100"
+    },
+    "done": true
+  },
+  "minecraft:adventure/adventuring_time": {
+    "criteria": {
+      "plains": "2017-07-17 13:35:44 +0100"
+    },
+    "done": false
+  }
+}

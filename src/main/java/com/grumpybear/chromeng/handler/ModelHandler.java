@@ -70,4 +70,6 @@ public class ModelHandler {
 				.putStateModelLocations(state.getBlock())
 				.get(state);
 	}
+
+	private ModelHandler(){}
 }

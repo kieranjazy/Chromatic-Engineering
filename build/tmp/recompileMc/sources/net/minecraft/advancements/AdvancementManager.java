@@ -42,7 +42,7 @@ import org.apache.logging.log4j.Logger;
 public class AdvancementManager
 {
     private static final Logger field_192782_a = LogManager.getLogger();
-    private static final Gson field_192783_b = (new GsonBuilder()).registerTypeHierarchyAdapter(Advancement.Builder.class, new JsonDeserializer<Advancement.Builder>()
+    public static final Gson field_192783_b = (new GsonBuilder()).registerTypeHierarchyAdapter(Advancement.Builder.class, new JsonDeserializer<Advancement.Builder>()
     {
         public Advancement.Builder deserialize(JsonElement p_deserialize_1_, Type p_deserialize_2_, JsonDeserializationContext p_deserialize_3_) throws JsonParseException
         {
@@ -66,6 +66,7 @@ public class AdvancementManager
         field_192784_c.func_192087_a();
         Map<ResourceLocation, Advancement.Builder> map = this.func_192781_c();
         this.func_192777_a(map);
+        this.field_193768_e |= net.minecraftforge.common.ForgeHooks.loadAdvancements(map);
         field_192784_c.func_192083_a(map);
 
         for (Advancement advancement : field_192784_c.func_192088_b())

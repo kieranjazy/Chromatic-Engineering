@@ -358,12 +358,9 @@ public class TileEntityFurnace extends TileEntityLockable implements ITickable, 
         }
         else
         {
+            int burnTime = net.minecraftforge.event.ForgeEventFactory.getItemBurnTime(stack);
+            if (burnTime >= 0) return burnTime;
             Item item = stack.getItem();
-            if (!item.getRegistryName().getResourceDomain().equals("minecraft"))
-            {
-                int burnTime = net.minecraftforge.fml.common.registry.GameRegistry.getFuelValue(stack);
-                if (burnTime != 0) return burnTime;
-            }
 
             if (item == Item.getItemFromBlock(Blocks.WOODEN_SLAB))
             {

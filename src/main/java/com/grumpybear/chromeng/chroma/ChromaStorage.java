@@ -1,5 +1,6 @@
 package com.grumpybear.chromeng.chroma;
 
+import com.grumpybear.chromeng.util.ItemStackUtil;
 import net.minecraft.nbt.NBTTagCompound;
 
 public class ChromaStorage {
@@ -107,7 +108,7 @@ public class ChromaStorage {
 
 	public static ChromaStorage storageFromNBT(NBTTagCompound nbt) {
 		ChromaStorage temp = new ChromaStorage(1000);
-		if (nbt.hasNoTags()) {
+		if (!ItemStackUtil.hasChromaTags(nbt)) {
 			return temp;
 		}
 

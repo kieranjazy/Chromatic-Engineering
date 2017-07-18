@@ -1,7 +1,5 @@
 package com.grumpybear.chromeng.block.tile;
 
-import javax.annotation.Nonnull;
-
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.NetworkManager;
@@ -10,6 +8,9 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ITickable;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
+
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 
 public class TileCE extends TileEntity implements ITickable {
 
@@ -21,15 +22,17 @@ public class TileCE extends TileEntity implements ITickable {
 	@Nonnull
 	@Override
 	public NBTTagCompound writeToNBT(NBTTagCompound par1nbtTagCompound) {
-		NBTTagCompound ret = super.writeToNBT(par1nbtTagCompound);
-		writePacketNBT(ret);
-		return ret;
+		super.writeToNBT(par1nbtTagCompound);
+		writePacketNBT(par1nbtTagCompound);
+		return par1nbtTagCompound;
 	}
 
 	@Nonnull
 	@Override
 	public final NBTTagCompound getUpdateTag() {
-		return writeToNBT(new NBTTagCompound());
+		NBTTagCompound updateTag = super.getUpdateTag();
+		writeClientDataToNBT(updateTag);
+		return updateTag;
 	}
 
 	@Override
@@ -42,17 +45,26 @@ public class TileCE extends TileEntity implements ITickable {
 
 	public void readPacketNBT(NBTTagCompound cmp) {}
 
+	@Nullable
 	@Override
-	public final SPacketUpdateTileEntity getUpdatePacket() {
-		NBTTagCompound tag = new NBTTagCompound();
-		writePacketNBT(tag);
-		return new SPacketUpdateTileEntity(pos, -999, tag);
+	public SPacketUpdateTileEntity getUpdatePacket() {
+		NBTTagCompound nbtTag = new NBTTagCompound();
+		this.writeClientDataToNBT(nbtTag);
+		return new SPacketUpdateTileEntity(pos, 1, nbtTag);
+	}
+
+	public void writeClientDataToNBT(NBTTagCompound tagCompound) {
+		writeToNBT(tagCompound);
 	}
 
 	@Override
 	public void onDataPacket(NetworkManager net, SPacketUpdateTileEntity packet) {
-		super.onDataPacket(net, packet);
-		readPacketNBT(packet.getNbtCompound());
+		readClientDataFromNBT(packet.getNbtCompound());
+	}
+
+
+	public void readClientDataFromNBT(NBTTagCompound tagCompound) {
+		readFromNBT(tagCompound);
 	}
 
 	@Override

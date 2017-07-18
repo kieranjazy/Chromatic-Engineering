@@ -27,4 +27,9 @@ public class ItemLordvessel extends ItemChargeSingle{
 
       return new ActionResult<ItemStack>(EnumActionResult.SUCCESS, playerIn.getHeldItemMainhand());
    }
+
+   @Override
+   public int getCECost() {
+      return 0;
+   }
 }

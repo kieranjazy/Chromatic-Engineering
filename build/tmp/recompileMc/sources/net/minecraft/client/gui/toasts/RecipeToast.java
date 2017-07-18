@@ -43,7 +43,7 @@ public class RecipeToast implements IToast
             p_193653_1_.func_192989_b().fontRendererObj.drawString(I18n.format("recipe.toast.title"), 30, 7, -11534256);
             p_193653_1_.func_192989_b().fontRendererObj.drawString(I18n.format("recipe.toast.description"), 30, 18, -16777216);
             RenderHelper.enableGUIStandardItemLighting();
-            p_193653_1_.func_192989_b().getRenderItem().renderItemAndEffectIntoGUI((EntityLivingBase)null, this.field_193666_c.get((int)(p_193653_2_ / (5000L / (long)this.field_193666_c.size()) % (long)this.field_193666_c.size())), 8, 8);
+            p_193653_1_.func_192989_b().getRenderItem().renderItemAndEffectIntoGUI((EntityLivingBase)null, this.field_193666_c.get((int)(p_193653_2_ * (long)this.field_193666_c.size() / 5000L % (long)this.field_193666_c.size())), 8, 8); //Forge: fix math so that it doesn't divide by 0 when there are more than 5000 recipes
             return p_193653_2_ - this.field_193667_d >= 5000L ? IToast.Visibility.HIDE : IToast.Visibility.SHOW;
         }
     }

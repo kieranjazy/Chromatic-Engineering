@@ -3,7 +3,6 @@ package com.grumpybear.chromeng.gui.chroma;
 import com.grumpybear.chromeng.block.tile.TileExtractor;
 import com.grumpybear.chromeng.chroma.IChromaStorage;
 import com.grumpybear.chromeng.gui.container.chroma.ContainerExtractor;
-import com.grumpybear.chromeng.gui.element.GuiChroma;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.util.ResourceLocation;

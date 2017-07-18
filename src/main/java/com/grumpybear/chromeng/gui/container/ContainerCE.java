@@ -3,29 +3,18 @@ package com.grumpybear.chromeng.gui.container;
 
 import com.grumpybear.chromeng.block.tile.TileCE;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.inventory.Container;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
 
 
-public class ContainerCE extends Container {
+public class ContainerCE extends ContainerBase {
 
 	TileCE baseTile;
-	
-	public ContainerCE(IInventory playerInv, TileCE tile) {
-		//PlayerInv
-		for (int y = 0; y < 3; ++y) {
-			for (int x = 0; x < 9; ++x) {
-				this.addSlotToContainer(new Slot(playerInv, x + y * 9 + 9, 8 + x * 18, 84 + y * 18));
-			}
-		}
-		
-		for (int x = 0; x < 9; ++x) {
-			this.addSlotToContainer(new Slot(playerInv, x, 8 + x * 18, 142));
-		}
 
-		baseTile = tile;
+	public ContainerCE(IInventory playerInv, TileCE base) {
+		super(playerInv);
+		baseTile = base;
 	}
 
 

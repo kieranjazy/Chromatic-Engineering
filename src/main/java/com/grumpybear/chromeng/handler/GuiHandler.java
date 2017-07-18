@@ -1,12 +1,15 @@
 package com.grumpybear.chromeng.handler;
 
+import com.grumpybear.chromeng.block.tile.TileBonfire;
 import com.grumpybear.chromeng.block.tile.TileDisplacer;
 import com.grumpybear.chromeng.block.tile.TileEnergiser;
 import com.grumpybear.chromeng.block.tile.TileExtractor;
+import com.grumpybear.chromeng.gui.GuiBonfire;
 import com.grumpybear.chromeng.gui.GuiEnergiser;
 import com.grumpybear.chromeng.gui.GuiFluidDisplacer;
 import com.grumpybear.chromeng.gui.GuiLordvessel;
 import com.grumpybear.chromeng.gui.chroma.GuiExtractor;
+import com.grumpybear.chromeng.gui.container.ContainerBonfire;
 import com.grumpybear.chromeng.gui.container.ContainerEnergiser;
 import com.grumpybear.chromeng.gui.container.ContainerFluidDisplacer;
 import com.grumpybear.chromeng.gui.container.ContainerLordvessel;
@@ -23,6 +26,7 @@ public class GuiHandler implements IGuiHandler {
 	public static final int ENERGISER = 1;
 	public static final int EXTRACTOR = 2;
 	public static final int LORDVESSEL = 3;
+	public static final int BONFIRE = 4;
 
 	
 	@Override
@@ -38,6 +42,8 @@ public class GuiHandler implements IGuiHandler {
 			return new ContainerExtractor(player.inventory, (TileExtractor) tile);
 		if (ID == 3)
 			return new ContainerLordvessel(player.inventory);
+		if (ID == 4)
+			return new ContainerBonfire(player.inventory, (TileBonfire) tile);
 
 		return null;
 	}
@@ -55,6 +61,8 @@ public class GuiHandler implements IGuiHandler {
 			return new GuiExtractor(player.inventory, (TileExtractor) tile);
 		if (ID == 3)
 			return new GuiLordvessel(player.inventory);
+		if (ID == 4)
+			return new GuiBonfire(player.inventory, (TileBonfire) tile);
 		
 		
 		return null;

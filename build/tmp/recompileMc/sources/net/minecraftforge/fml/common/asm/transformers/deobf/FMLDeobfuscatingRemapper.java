@@ -430,7 +430,7 @@ public class FMLDeobfuscatingRemapper extends Remapper {
         }
         catch (IOException e)
         {
-            e.printStackTrace();
+            FMLLog.log.error("Error getting patched resource:", e);
         }
     }
     public void mergeSuperMaps(String name, @Nullable String superName, String[] interfaces)
@@ -494,12 +494,7 @@ public class FMLDeobfuscatingRemapper extends Remapper {
         {
             return fType;
         }
-        Map<String,String> newClassMap = fieldDescriptions.get(newType);
-        if (newClassMap == null)
-        {
-            newClassMap = Maps.newHashMap();
-            fieldDescriptions.put(newType, newClassMap);
-        }
+        Map<String, String> newClassMap = fieldDescriptions.computeIfAbsent(newType, k -> Maps.newHashMap());
         newClassMap.put(newName, fType);
         return fType;
     }

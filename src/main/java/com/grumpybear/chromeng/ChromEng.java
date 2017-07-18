@@ -2,6 +2,7 @@ package com.grumpybear.chromeng;
 
 import com.grumpybear.chromeng.handler.GuiHandler;
 import com.grumpybear.chromeng.lib.LibMain;
+import com.grumpybear.chromeng.network.ChromEngPacketHandler;
 import com.grumpybear.chromeng.proxy.IProxy;
 import com.grumpybear.chromeng.world.CEWorldGen;
 import net.minecraftforge.fml.common.Mod;
@@ -28,12 +29,13 @@ public class ChromEng {
 	@EventHandler
 	public void preInit(FMLPreInitializationEvent event) {
 		proxy.preInit(event);
+		ChromEngPacketHandler.register();
 	}
 	
 	@EventHandler
 	public void init(FMLInitializationEvent event) {
 		proxy.init(event);
-		
+
 		NetworkRegistry.INSTANCE.registerGuiHandler(instance, new GuiHandler());
 	}
 	

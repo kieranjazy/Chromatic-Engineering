@@ -29,11 +29,11 @@
     <orderEntry type="module-library">
       <library>
         <CLASSES>
-          <root url="jar://$USER_HOME$/.gradle/caches/minecraft/net/minecraftforge/forge/1.12-14.21.0.2375/snapshot/20161220/forgeSrc-1.12-14.21.0.2375.jar!/" />
+          <root url="jar://$USER_HOME$/.gradle/caches/minecraft/net/minecraftforge/forge/1.12-14.21.1.2407/snapshot/20161220/forgeSrc-1.12-14.21.1.2407.jar!/" />
         </CLASSES>
         <JAVADOC />
         <SOURCES>
-          <root url="jar://$USER_HOME$/.gradle/caches/minecraft/net/minecraftforge/forge/1.12-14.21.0.2375/snapshot/20161220/forgeSrc-1.12-14.21.0.2375-sources.jar!/" />
+          <root url="jar://$USER_HOME$/.gradle/caches/minecraft/net/minecraftforge/forge/1.12-14.21.1.2407/snapshot/20161220/forgeSrc-1.12-14.21.1.2407-sources.jar!/" />
         </SOURCES>
       </library>
     </orderEntry>

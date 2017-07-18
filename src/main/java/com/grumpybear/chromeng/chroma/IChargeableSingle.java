@@ -7,9 +7,9 @@ import net.minecraft.item.ItemStack;
  */
 public interface IChargeableSingle {
 
-   public void addCE(ItemStack stack, int i);
+   public boolean addCE(ItemStack stack, int i);
 
-   public void minusCE(ItemStack stack, int i);
+   public boolean minusCE(ItemStack stack, int i);
 
    public ChromaUnit getChromaUnit(ItemStack stack);
 

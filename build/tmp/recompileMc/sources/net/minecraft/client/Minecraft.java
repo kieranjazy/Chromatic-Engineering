@@ -605,7 +605,7 @@ public class Minecraft implements IThreadListener, ISnooperInfo
         this.renderGlobal.makeEntityOutlineShader();
     }
 
-    private void func_193986_ar()
+    public void func_193986_ar()
     {
         SearchTree<ItemStack> searchtree = new SearchTree<ItemStack>((p_193988_0_) ->
         {
@@ -1736,6 +1736,11 @@ public class Minecraft implements IThreadListener, ISnooperInfo
             }
 
             Display.setFullscreen(this.fullscreen);
+            if (!this.fullscreen) //Forge: Fix MC-68754, Screen is not resizeable after exiting fullscreen due to LWJGL bug https://github.com/LWJGL/lwjgl/issues/142 which is fixed, but not in the version MC ships
+            {
+                Display.setResizable(false);
+                Display.setResizable(true);
+            }
             Display.setVSyncEnabled(this.gameSettings.enableVsync);
             this.updateDisplay();
         }
@@ -3409,5 +3414,10 @@ public class Minecraft implements IThreadListener, ISnooperInfo
     public Tutorial func_193032_ao()
     {
         return this.field_193035_aW;
+    }
+
+    public SearchTreeManager getSearchTreeManager()
+    {
+        return this.field_193995_ae;
     }
 }

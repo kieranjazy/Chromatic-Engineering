@@ -1,0 +1,13 @@
+{
+  "minecraft:adventure/adventuring_time": {
+    "criteria": {
+      "beaches": "2017-07-12 22:28:43 +0100",
+      "plains": "2017-07-12 22:28:37 +0100",
+      "ocean": "2017-07-12 22:28:44 +0100",
+      "extreme_hills": "2017-07-12 22:28:56 +0100",
+      "river": "2017-07-12 22:28:49 +0100",
+      "stone_beach": "2017-07-12 22:28:47 +0100"
+    },
+    "done": false
+  }
+}

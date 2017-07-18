@@ -1209,6 +1209,16 @@ public class Item extends net.minecraftforge.registries.IForgeRegistryEntry.Impl
         return builder.build();
     }
 
+    /**
+     * @return the fuel burn time for this itemStack in a furnace.
+     * Return 0 to make it not act as a fuel.
+     * Return -1 to let the default vanilla logic decide.
+     */
+    public int getItemBurnTime(ItemStack itemStack)
+    {
+        return -1;
+    }
+
     /* ======================================== FORGE END   =====================================*/
 
     public static void registerItems()

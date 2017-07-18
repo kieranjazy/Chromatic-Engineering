@@ -2335,6 +2335,43 @@ public class Block extends net.minecraftforge.registries.IForgeRegistryEntry.Imp
     }
 
     /**
+     * Use this to change the fog color used when the entity is "inside" a material.
+     * Vec3d is used here as "r/g/b" 0 - 1 values.
+     *
+     * @param world         The world.
+     * @param pos           The position at the entity viewport.
+     * @param state         The state at the entity viewport.
+     * @param entity        the entity
+     * @param originalColor The current fog color, You are not expected to use this, Return as the default if applicable.
+     * @return The new fog color.
+     */
+    @SideOnly (Side.CLIENT)
+    public Vec3d getFogColor(World world, BlockPos pos, IBlockState state, Entity entity, Vec3d originalColor, float partialTicks)
+    {
+        if (state.getMaterial() == Material.WATER)
+        {
+            float f12 = 0.0F;
+
+            if (entity instanceof net.minecraft.entity.EntityLivingBase)
+            {
+                net.minecraft.entity.EntityLivingBase ent = (net.minecraft.entity.EntityLivingBase)entity;
+                f12 = (float)net.minecraft.enchantment.EnchantmentHelper.getRespirationModifier(ent) * 0.2F;
+
+                if (ent.isPotionActive(net.minecraft.init.MobEffects.WATER_BREATHING))
+                {
+                    f12 = f12 * 0.3F + 0.6F;
+                }
+            }
+            return new Vec3d(0.02F + f12, 0.02F + f12, 0.2F + f12);
+        }
+        else if (state.getMaterial() == Material.LAVA)
+        {
+            return new Vec3d(0.6F, 0.1F, 0.0F);
+        }
+        return originalColor;
+    }
+
+    /**
      * Gets the {@link IBlockState} to place
      * @param world The world the block is being placed in
      * @param pos The position the block is being placed at

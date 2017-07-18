@@ -52,7 +52,7 @@ public class NettyPacketEncoder extends MessageToByteEncoder < Packet<? >>
                 }
                 catch (Throwable throwable)
                 {
-                    LOGGER.error(throwable);
+                    throw throwable; // Forge: throw this instead of logging it, to prevent corrupt packets from being sent to the client where they are much harder to debug.
                 }
             }
         }

@@ -9,7 +9,6 @@ public class CommonProxy implements IProxy{
 
 	@Override
 	public void preInit(FMLPreInitializationEvent event) {
-		// TODO Auto-generated method stub
 		
 	}
 

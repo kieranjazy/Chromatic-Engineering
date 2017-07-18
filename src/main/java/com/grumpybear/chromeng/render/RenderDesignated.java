@@ -108,7 +108,7 @@ public class RenderDesignated {
         buffer.pos(mx+1, my+1, mz+1).color(r, g, b, a).endVertex();
         buffer.pos(mx+1, my+1, mz).color(r, g, b, a).endVertex();
 
-        buffer.pos(mx, my+1, mz).color(r, g, b, a).endVertex();
+         buffer.pos(mx, my+1, mz).color(r, g, b, a).endVertex();
         buffer.pos(mx, my+1, mz+1).color(r, g, b, a).endVertex();
         buffer.pos(mx, my+1, mz).color(r, g, b, a).endVertex();
         buffer.pos(mx+1, my+1, mz).color(r, g, b, a).endVertex();

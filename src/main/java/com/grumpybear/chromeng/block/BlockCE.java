@@ -6,6 +6,7 @@ import com.grumpybear.chromeng.lib.LibMain;
 import com.grumpybear.chromeng.render.IModelRegister;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
+import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.relauncher.Side;
@@ -35,7 +36,7 @@ public class BlockCE extends Block implements IModelRegister {
 
 	@SideOnly(Side.CLIENT)
 	public void registerModels() {
-	if (Item.getItemFromBlock(this) != null)
+	if (Item.getItemFromBlock(this) != Items.AIR)
 		ModelHandler.registerBlockToState(this, 0, getDefaultState());
 	}
 }

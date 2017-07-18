@@ -43,6 +43,7 @@ public class CECreativeTab extends CreativeTabs{
 		addItem(ModItems.darksign);
 		addItem(ModItems.palette);
 		addItem(ModItems.lordvessel);
+		addItem(ModItems.extensionConduit);
 		addBlock(ModBlocks.bonfire);
 		addBlock(ModBlocks.esotericShrine);
 		addBlock(ModBlocks.fluidDisplacer);

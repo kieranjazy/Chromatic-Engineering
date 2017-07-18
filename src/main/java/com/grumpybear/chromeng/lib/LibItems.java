@@ -9,6 +9,7 @@ public class LibItems {
 	public static final String DARKSIGN = "darksign";
 	public static final String PALETTE = "palette";
 	public static final String LORDVESSEL = "lordvessel";
+	public static final String EXTENSION_CONDUIT = "extensionConduit";
 	
 	public static final String[] DUST_TYPES = new String[] {
 			"dustEffervescent",

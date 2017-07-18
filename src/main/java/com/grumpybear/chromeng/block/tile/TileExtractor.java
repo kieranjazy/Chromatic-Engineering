@@ -2,7 +2,6 @@ package com.grumpybear.chromeng.block.tile;
 
 import com.grumpybear.chromeng.chroma.*;
 import com.grumpybear.chromeng.init.ModItems;
-import com.grumpybear.chromeng.item.ItemPalette;
 import com.grumpybear.chromeng.lib.LibNumbers;
 import com.grumpybear.chromeng.util.ItemStackUtil;
 import net.minecraft.init.Items;
@@ -190,16 +189,16 @@ public class TileExtractor extends TileInventory implements ISidedInventory, ICh
 	   ItemStack stack = getStackInSlot(i);
 	   if (stack.getItem() instanceof IChargeableSingle) {
 	      if (this.getChromaStorage().getColour(EnumColour.ORANGE).getCurrentCE() - LibNumbers.TRANSFER_RATE >= 0 && ItemStackUtil.getChromaUnit(stack).getCurrentCE() + LibNumbers.TRANSFER_RATE <= ItemStackUtil.getChromaUnit(stack).getMaxCE()) {
-             ((IChargeableSingle) stack.getItem()).addCE(stack, LibNumbers.TRANSFER_RATE);
-             this.getChromaStorage().getColour(EnumColour.ORANGE).minusCurrentCE(LibNumbers.TRANSFER_RATE);
+             if (((IChargeableSingle) stack.getItem()).addCE(stack, LibNumbers.TRANSFER_RATE))
+               this.getChromaStorage().getColour(EnumColour.ORANGE).minusCurrentCE(LibNumbers.TRANSFER_RATE);
           }
        }
 
        if (stack.getItem() instanceof IChargeableMulti) {
-	      ItemPalette palette = (ItemPalette) stack.getItem();
+	      IChargeableMulti chargeItem = (IChargeableMulti) stack.getItem();
 	      for (EnumColour colour : colours) {
-	         if (this.getChromaStorage().getColour(colour).getCurrentCE() - LibNumbers.TRANSFER_RATE >= 0 && palette.getChromaStorage(stack).getColour(colour).getCurrentCE() + LibNumbers.TRANSFER_RATE <= palette.getChromaStorage(stack).getMaxCE()) {
-                palette.addCE(stack, LibNumbers.TRANSFER_RATE, colour);
+	         if (this.getChromaStorage().getColour(colour).getCurrentCE() - LibNumbers.TRANSFER_RATE >= 0 && chargeItem.getChromaStorage(stack).getColour(colour).getCurrentCE() + LibNumbers.TRANSFER_RATE <= chargeItem.getChromaStorage(stack).getMaxCE()) {
+                chargeItem.addCE(stack, LibNumbers.TRANSFER_RATE, colour);
                 this.getChromaStorage().getColour(colour).minusCurrentCE(LibNumbers.TRANSFER_RATE);
              }
           }
