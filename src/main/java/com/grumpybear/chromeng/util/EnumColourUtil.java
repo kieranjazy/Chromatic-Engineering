@@ -9,8 +9,20 @@ import java.awt.*;
 
 public class EnumColourUtil {
 
+	public static final int RED_RGB = -65536;
+	public static final int ORANGE_RGB = -23296;
+	public static final int YELLOW_RGB = -256;
+	public static final int GREEN_RGB = -16711936;
+	public static final int BLUE_RGB = -16776961;
+	public static final int INDIGO_RGB = -11861886;
+	public static final int VIOLET_RGB = -7077677;
+
+	public static final int[] ENUMCOLOUR_RGB_ARRAY = {RED_RGB, ORANGE_RGB, YELLOW_RGB, GREEN_RGB, BLUE_RGB, INDIGO_RGB, VIOLET_RGB};
+
+
 	
 	public static EnumColour byteToColour(byte i) {
+
 		switch(i) {
 			case 1:		return EnumColour.RED;
 			case 2:		return EnumColour.ORANGE;
@@ -22,9 +34,14 @@ public class EnumColourUtil {
 		}
 		
 		return null;
+
+		/*
+		return EnumColour.values()[(int) i];
+		*/
 	}
 	
 	public static byte colourToByte(EnumColour colour) {
+
 		switch(colour) {
 			case RED:		return 1;
 			case ORANGE:	return 2;
@@ -36,6 +53,39 @@ public class EnumColourUtil {
 		}
 		
 		return 0;
+
+
+		/*
+
+		return (byte) colourToInt(colour);
+
+		*/
+	}
+
+	public static int colourToInt(EnumColour colour) {
+
+		switch(colour) {
+			case RED:		return 1;
+			case ORANGE:	return 2;
+			case YELLOW:	return 3;
+			case GREEN:		return 4;
+			case BLUE:		return 5;
+			case INDIGO:	return 6;
+			case VIOLET: 	return 7;
+		}
+
+		return 0;
+
+
+		/*
+		for (int i = 0; i < EnumColour.values().length; i++) {
+			if (colour == EnumColour.values()[i]) {
+				return i;
+			}
+		}
+
+		return 0;
+		*/
 	}
 	
 	public static String colourToString(EnumColour colour) {
@@ -67,74 +117,86 @@ public class EnumColourUtil {
 	}
 	
 	public static EnumColour pairToColour(Pair pair) {
-		if (pair == LibTextures.RED_FULL_LOCATION)
+
+		if (pair == LibTextures.RED_FULL_LOCATION) {
 			return EnumColour.RED;
-		
-		if (pair == LibTextures.ORANGE_FULL_LOCATION)
+		} else if (pair == LibTextures.ORANGE_FULL_LOCATION) {
 			return EnumColour.ORANGE;
-		
-		if (pair == LibTextures.YELLOW_FULL_LOCATION)
+		} else if (pair == LibTextures.YELLOW_FULL_LOCATION) {
 			return EnumColour.YELLOW;
-		
-		if (pair == LibTextures.BLUE_FULL_LOCATION)
+		} else if (pair == LibTextures.BLUE_FULL_LOCATION) {
 			return EnumColour.BLUE;
-		
-		if (pair == LibTextures.INDIGO_FULL_LOCATION)
+		} else if (pair == LibTextures.INDIGO_FULL_LOCATION) {
 			return EnumColour.INDIGO;
-		
-		if (pair == LibTextures.VIOLET_FULL_LOCATION)
+		} else if (pair == LibTextures.VIOLET_FULL_LOCATION) {
 			return EnumColour.VIOLET;
-		
-		return EnumColour.BLUE;
+		} else {
+			return EnumColour.BLUE;
+		}
 	}
 
 	public static TextFormatting colourToFormatting(EnumColour colour) {
-		if (colour == EnumColour.RED)
+		if (colour == EnumColour.RED) {
 			return TextFormatting.RED;
-
-		if (colour == EnumColour.ORANGE)
+		} else if (colour == EnumColour.ORANGE) {
 			return TextFormatting.GOLD;
-
-		if (colour == EnumColour.YELLOW)
+		} else if (colour == EnumColour.YELLOW) {
 			return TextFormatting.YELLOW;
-
-		if (colour == EnumColour.GREEN)
+		} else if (colour == EnumColour.GREEN) {
 			return TextFormatting.GREEN;
-
-		if (colour == EnumColour.BLUE)
+		} else if (colour == EnumColour.BLUE) {
 			return TextFormatting.BLUE;
-
-		if (colour == EnumColour.INDIGO)
+		} else if (colour == EnumColour.INDIGO) {
 			return TextFormatting.DARK_BLUE;
-
-		if (colour == EnumColour.VIOLET)
+		} else if (colour == EnumColour.VIOLET) {
 			return TextFormatting.DARK_PURPLE;
-
-		return TextFormatting.OBFUSCATED;
+		} else {
+			return TextFormatting.OBFUSCATED;
+		}
 	}
 
 	public static int colourToRGB(EnumColour colour) {
-		if (colour == EnumColour.RED)
-			return new Color(255, 0, 0).getRGB();
+		if (colour == EnumColour.RED) {
+			return RED_RGB;
+		} else if (colour == EnumColour.ORANGE) {
+			return ORANGE_RGB;
+		} else if (colour == EnumColour.YELLOW) {
+			return YELLOW_RGB;
+		} else if (colour == EnumColour.GREEN) {
+			return GREEN_RGB;
+		} else if (colour == EnumColour.BLUE) {
+			return BLUE_RGB;
+		} else if (colour == EnumColour.INDIGO) {
+			return INDIGO_RGB;
+		} else if (colour == EnumColour.VIOLET) {
+			return VIOLET_RGB;
+		} else {
+			return 0;
+		}
 
-		if (colour == EnumColour.ORANGE)
-			return new Color(255, 165, 0).getRGB();
 
-		if (colour == EnumColour.YELLOW)
-			return new Color(255, 255, 0).getRGB();
-
-		if (colour == EnumColour.GREEN)
-			return new Color(0, 255, 0).getRGB();
-
-		if (colour == EnumColour.BLUE)
-			return new Color(0, 0, 255).getRGB();
-
-		if (colour == EnumColour.INDIGO)
-			return new Color(75, 0, 130).getRGB();
-
-		if (colour == EnumColour.VIOLET)
-			return new Color(148, 0, 211).getRGB();
+		/*
+		for (int i = 0; i < EnumColour.values().length; i++) {
+			if (colour == EnumColour.values()[i]) {
+				return ENUMCOLOUR_RGB_ARRAY[i];
+			}
+		}
 
 		return 0;
+		*/
 	}
+
+	public static EnumColour RGBtoColour(int rgb) {
+		for (int i = 0; i < ENUMCOLOUR_RGB_ARRAY.length; i++) {
+			if (rgb == ENUMCOLOUR_RGB_ARRAY[i]) {
+				return EnumColour.values()[i];
+			}
+		}
+
+		return EnumColour.RED;
+	}
+
+
+
+
 }

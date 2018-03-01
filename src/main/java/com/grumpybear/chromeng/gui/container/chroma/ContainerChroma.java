@@ -1,35 +1,43 @@
 package com.grumpybear.chromeng.gui.container.chroma;
 
 import com.grumpybear.chromeng.block.tile.TileCE;
+import com.grumpybear.chromeng.block.tile.TileCEStorage;
 import com.grumpybear.chromeng.block.tile.TileExtractor;
+import com.grumpybear.chromeng.chroma.ChromaStorage;
+import com.grumpybear.chromeng.chroma.ChromaUnit;
+import com.grumpybear.chromeng.chroma.EnumColour;
 import com.grumpybear.chromeng.chroma.IChromaStorage;
 import com.grumpybear.chromeng.gui.container.ContainerCE;
 import com.grumpybear.chromeng.gui.slot.SlotEnergyOutput;
+import com.grumpybear.chromeng.util.EnumColourUtil;
 import net.minecraft.inventory.IContainerListener;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
+import java.util.ArrayList;
+
 public class ContainerChroma extends ContainerCE{
 	
 	IChromaStorage chromaHandler;
-	private int current1;
-	private int current2;
-	private int current3;
-	private int current4;
-	private int current5;
-	private int current6;
-	private int current7;
+    TileCEStorage tile;
+	ArrayList<ChromaUnit> ceValues;
+	SlotEnergyOutput ceSlot;
 
-	public ContainerChroma(IInventory playerInv, TileEntity chromaHandler) {
+	public ContainerChroma(IInventory playerInv, TileEntity chromaHandler, int xPos, int yPos) {
 		super(playerInv, (TileCE) chromaHandler);
 		this.chromaHandler = (IChromaStorage) chromaHandler;
+        this.tile = (TileCEStorage) this.chromaHandler;
+        this.ceValues = new ArrayList<>();
+        for (ChromaUnit unit : this.chromaHandler.getChromaStorage().getChromaUnits()) {
+           ChromaUnit tempUnit = new ChromaUnit(unit.getChromaType(), unit.getMaxCE());
+           tempUnit.setCurrentCE(-1);
+           ceValues.add(tempUnit);
+        }
 
-		TileExtractor tile = (TileExtractor) chromaHandler;
-
-		addSlotToContainer(new SlotEnergyOutput(tile, 4, 179, 116));
-
+        this.ceSlot = new SlotEnergyOutput(tile, tile.getSizeInventory() - 1, xPos, yPos);
+        addSlotToContainer(ceSlot);
 	}
 	
 	@Override
@@ -39,65 +47,41 @@ public class ContainerChroma extends ContainerCE{
         listener.sendAllWindowProperties(this, (IInventory) this.chromaHandler);
     }
 
+    @Override
     public void detectAndSendChanges()
     {
         super.detectAndSendChanges();
 
-        TileExtractor tile = (TileExtractor) this.chromaHandler;
-        
-        for (int i = 0; i < this.listeners.size(); ++i)
-        {
-            IContainerListener icontainerlistener = this.listeners.get(i);
+        for (int i = 0; i < this.listeners.size(); ++i) {
+           IContainerListener iContainerListener = this.listeners.get(i);
 
-            if (this.current1 != tile.getField(4))
-            {
-                icontainerlistener.sendProgressBarUpdate(this, 4, tile.getField(4));
-            }
-
-            if (this.current1 != tile.getField(5))
-            {
-                icontainerlistener.sendProgressBarUpdate(this, 5, tile.getField(5));
-            }
-            
-            if (this.current1 != tile.getField(6))
-            {
-                icontainerlistener.sendProgressBarUpdate(this, 6, tile.getField(6));
-            }
-            
-            if (this.current1 != tile.getField(7))
-            {
-                icontainerlistener.sendProgressBarUpdate(this, 7, tile.getField(7));
-            }
-            
-            if (this.current1 != tile.getField(8))
-            {
-                icontainerlistener.sendProgressBarUpdate(this, 8, tile.getField(8));
-            }
-            
-            if (this.current1 != tile.getField(9))
-            {
-                icontainerlistener.sendProgressBarUpdate(this, 9, tile.getField(9));
-            }
-            
-            if (this.current1 != tile.getField(10))
-            {
-                icontainerlistener.sendProgressBarUpdate(this, 10, tile.getField(10));
-            }
+           for (int k = 0; k < ceValues.size(); k++) {
+              if (ceValues.get(k).getCurrentCE() != tile.getField(EnumColourUtil.colourToRGB(ceValues.get(k).getChromaType()))) {
+                 iContainerListener.sendProgressBarUpdate(this, EnumColourUtil.colourToRGB(ceValues.get(k).getChromaType()), this.tile.getField(EnumColourUtil.colourToRGB(ceValues.get(k).getChromaType())));
+              }
+           }
         }
 
-        this.current1 = tile.getField(4);
-        this.current2 = tile.getField(5);
-        this.current3 = tile.getField(6);
-        this.current4 = tile.getField(7);
-        this.current5 = tile.getField(8);
-        this.current6 = tile.getField(9);
-        this.current7 = tile.getField(10);
+       for (ChromaUnit ceValue : ceValues) {
+          ceValue.setCurrentCE(this.tile.getField(EnumColourUtil.colourToRGB(ceValue.getChromaType())));
+       }
     }
     
     @SideOnly(Side.CLIENT)
     public void updateProgressBar(int id, int data)
     {
-        ((TileExtractor) chromaHandler).setField(id, data);
+        ((TileCEStorage) chromaHandler).setField(id, data);
     }
-	
+
+    public ChromaStorage getChromaStorage() {
+	   return chromaHandler.getChromaStorage();
+    }
+
+    public TileCEStorage getTile() {
+	   return tile;
+    }
+
+   public SlotEnergyOutput getCeSlot() {
+      return ceSlot;
+   }
 }

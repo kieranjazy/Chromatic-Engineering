@@ -9,4 +9,6 @@ public class LibBlocks {
 	public static final String CHROMA_ORE = "chromaOre";
 	public static final String CHROMATIC_EXTRACTOR = "chromaticExtractor";
 	public static final String BONFIRE = "bonfire";
+	public static final String BATTERY = "battery";
+	public static final String LAND_LEVELLER = "landLeveller";
 }

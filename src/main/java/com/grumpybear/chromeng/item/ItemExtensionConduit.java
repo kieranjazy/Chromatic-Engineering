@@ -134,17 +134,16 @@ public class ItemExtensionConduit extends ItemChargeSingle implements IModeItem{
    public void onUpdate(ItemStack stack, World worldIn, Entity entityIn, int itemSlot, boolean isSelected) {
       if (isSelected && !worldIn.isRemote) {
           if (CEKeyBindings.key.isPressed()) {
-             ChromEngPacketHandler.INSTANCE.sendToServer(new MessageSwitchMode(stack));
-             switchMode(stack);
+             switchMode(stack, new MessageSwitchMode(stack));
          }
      }
    }
 
    public Set<BlockPos> getFinalBlockList(BlockPos pos1, BlockPos pos2) {
-      Set<BlockPos> blocks = new LinkedHashSet<>();
-
-      blocks.add(pos1);
-      blocks.add(pos2);
+      Set<BlockPos> blocks = new LinkedHashSet<BlockPos>() {{
+         add(pos1);
+         add(pos2);
+      }};
 
       for (int j = 0; j < ((Math.max(pos1.getX(), pos2.getX()) - Math.min(pos1.getX(), pos2.getX())) + 1); j++) {
          for (int i = 0; i < ((Math.max(pos1.getZ(), pos2.getZ()) - Math.min(pos1.getZ(), pos2.getZ())) + 1); i++) {

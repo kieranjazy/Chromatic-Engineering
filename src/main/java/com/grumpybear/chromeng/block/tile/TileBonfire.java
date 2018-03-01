@@ -2,6 +2,7 @@ package com.grumpybear.chromeng.block.tile;
 
 import com.grumpybear.chromeng.gui.element.IconButton;
 import com.grumpybear.chromeng.init.ModItems;
+import com.grumpybear.chromeng.item.ItemLordvessel;
 import com.grumpybear.chromeng.util.BlockPosUtil;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
@@ -18,6 +19,7 @@ public class TileBonfire extends TileInventory{
 
 	public TileBonfire() {
 		this.buttons = new ArrayList<>();
+		isBurning = true;
 	}
 
 	public boolean isBurning() {
@@ -67,15 +69,46 @@ public class TileBonfire extends TileInventory{
 		}
 	}
 
-	public void linkLordvessel(String text) {
+	public void linkLordvessel(String text, IconButton.IconReturn icon) {
+		ItemStack stack  = this.getStackInSlot(0);
 
+		if (getStackInSlot(1).getItem() == Items.AIR && stack.getItem() == ModItems.lordvessel) {
+			ItemLordvessel item = (ItemLordvessel) stack.getItem();
+
+			if (item.getNextAvailButton(stack) <= 11 && !item.getBlockPoses(stack).contains(this.pos)) {
+				NBTTagCompound nbt = getNBT(stack);
+				int num = item.getNextAvailButton(stack);
+
+				BlockPosUtil.writeToNBT(nbt, this.getPos(), num);
+				nbt.setString("Name" + num, text);
+				nbt.setInteger("IconX" + num, icon.getIconX());
+				nbt.setInteger("IconY" + num, icon.getIconY());
+				nbt.setBoolean("Set" + num, true);
+				item.incrNextButton(stack);
+
+				this.setInventorySlotContents(1, stack.copy());
+				this.getStackInSlot(0).shrink(1);
+
+			}
+		}
 	}
 
 
 	public boolean linkBonfire(ItemStack stack, TileBonfire bonfire) {
-		if (bonfire.isBurning()) {
-			bonfire.writeToDarksignNBT(getNBT(stack));
-			return true;
+		if (stack.getItem() == ModItems.darksign) {
+
+			if (bonfire.isBurning()) {
+				bonfire.writeToDarksignNBT(getNBT(stack));
+				return true;
+			} else {
+				return false;
+			}
+		} else if (stack.getItem() == ModItems.lordvessel) {
+			if (bonfire.isBurning()) {
+				return true;
+			} else {
+				return false;
+			}
 		} else {
 			return false;
 		}

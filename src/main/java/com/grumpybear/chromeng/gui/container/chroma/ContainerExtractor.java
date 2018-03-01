@@ -1,6 +1,8 @@
 package com.grumpybear.chromeng.gui.container.chroma;
 
 import com.grumpybear.chromeng.block.tile.TileExtractor;
+import com.grumpybear.chromeng.gui.slot.SlotEnergyOutput;
+import com.grumpybear.chromeng.lib.LibTextures;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.*;
 import net.minecraft.tileentity.TileEntity;
@@ -13,9 +15,10 @@ public class ContainerExtractor extends ContainerChroma{
     private int totalCookTime;
     private int extractorBurnTime;
     private int currentItemBurnTime;
-	
+
+
 	public ContainerExtractor(IInventory playerInv, TileEntity tile) {
-		super(playerInv, tile);
+		super(playerInv, tile, LibTextures.SLOT_X_POS_EXTRACTOR, LibTextures.SLOT_Y_POS_EXTRACTOR);
 		
 		myTile = (TileExtractor) tile;
 
@@ -72,6 +75,7 @@ public class ContainerExtractor extends ContainerChroma{
     @SideOnly(Side.CLIENT)
     public void updateProgressBar(int id, int data)
     {
+       super.updateProgressBar(id, data);
         this.myTile.setField(id, data);
     }
 }

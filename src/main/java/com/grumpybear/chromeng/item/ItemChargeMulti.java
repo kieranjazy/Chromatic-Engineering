@@ -2,20 +2,17 @@ package com.grumpybear.chromeng.item;
 
 import com.grumpybear.chromeng.chroma.ChromaStorage;
 import com.grumpybear.chromeng.chroma.EnumColour;
-import com.grumpybear.chromeng.chroma.IChargeableMulti;
-import com.grumpybear.chromeng.chroma.ICharger;
 import com.grumpybear.chromeng.util.ItemStackUtil;
 import net.minecraft.item.ItemStack;
 
 /**
  * Created by Kieran on 6/27/2017.
  */
-public class ItemChargeMulti extends ItemCE implements IChargeableMulti, ICharger {
+public class ItemChargeMulti extends ItemCE {
    public ItemChargeMulti(String name) {
       super(name);
    }
 
-   @Override
    public void addCE(ItemStack stack, int i, EnumColour colour) {
       ChromaStorage storage = getChromaStorage(stack);
 
@@ -37,4 +34,6 @@ public class ItemChargeMulti extends ItemCE implements IChargeableMulti, ICharge
    public ChromaStorage getChromaStorage(ItemStack stack) {
       return ChromaStorage.storageFromNBT(ItemStackUtil.getNBT(stack));
    }
+
+
 }

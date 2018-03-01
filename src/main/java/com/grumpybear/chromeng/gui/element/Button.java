@@ -38,19 +38,23 @@ public class Button extends Element {
 
    @Override
    public void drawBackground(int mouseX, int mouseY) {
-      Minecraft.getMinecraft().getTextureManager().bindTexture(texture);
+      if (visible) {
+         Minecraft.getMinecraft().getTextureManager().bindTexture(texture);
 
-      if (!intersectsWith(mouseX, mouseY)) {
-         drawRectangle(xPos, yPos, texX, texY, width, height);
-      } else {
-         drawRectangle(xPos, yPos, hoverX, hoverY, width, height);
+         if (!intersectsWith(mouseX, mouseY)) {
+            drawRectangle(xPos, yPos, texX, texY, width, height);
+         } else {
+            drawRectangle(xPos, yPos, hoverX, hoverY, width, height);
+         }
       }
    }
 
    @Override
    public void drawForeground(FontRenderer fontRenderer) {
-      if (this.buttonString != null)
-         drawCenteredString(fontRenderer);
+      if (visible) {
+         if (this.buttonString != null)
+            drawCenteredString(fontRenderer);
+      }
    }
 
    public void drawCenteredString(FontRenderer fontRenderer) {

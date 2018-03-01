@@ -2,8 +2,9 @@ package com.grumpybear.chromeng.init;
 
 import com.grumpybear.chromeng.block.BlockBonfire;
 import com.grumpybear.chromeng.block.BlockChromaOre;
-import com.grumpybear.chromeng.block.BlockEsotericShrine;
+import com.grumpybear.chromeng.block.BlockLandLeveller;
 import com.grumpybear.chromeng.block.BlockShrineReceptacle;
+import com.grumpybear.chromeng.block.chroma.BlockBattery;
 import com.grumpybear.chromeng.block.chroma.BlockChromaticExtractor;
 import com.grumpybear.chromeng.block.tile.*;
 import com.grumpybear.chromeng.block.workonlater.BlockEnergiser;
@@ -22,24 +23,26 @@ import net.minecraftforge.registries.IForgeRegistry;
 
 @Mod.EventBusSubscriber
 public class ModBlocks {
-	public static Block esotericShrine = new BlockEsotericShrine();
 	public static Block fluidDisplacer = new BlockFluidDisplacer();
 	public static Block shrineReceptacle = new BlockShrineReceptacle();
 	public static Block energiser = new BlockEnergiser();
 	public static Block chromaOre = new BlockChromaOre();
 	public static Block extractor = new BlockChromaticExtractor();
 	public static Block bonfire = new BlockBonfire();
+	public static Block battery = new BlockBattery();
+	public static Block landLeveller = new BlockLandLeveller();
 
 	@SubscribeEvent
 	public static void registerBlocks(RegistryEvent.Register<Block> evt) {
 		IForgeRegistry<Block> registry = evt.getRegistry();
-		registry.register(esotericShrine);
 		registry.register(fluidDisplacer);
 		registry.register(shrineReceptacle);
 		registry.register(energiser);
 		registry.register(chromaOre);
 		registry.register(extractor);
 		registry.register(bonfire);
+		registry.register(battery);
+		registry.register(landLeveller);
 
 		initTileEntities();
 	}
@@ -48,13 +51,14 @@ public class ModBlocks {
 	public static void registerItemBlocks(RegistryEvent.Register<Item> evt) {
 		IForgeRegistry<Item> registry = evt.getRegistry();
 
-		registry.register(new ItemBlock(esotericShrine).setRegistryName(esotericShrine.getRegistryName()));
 		registry.register(new ItemBlock(fluidDisplacer).setRegistryName(fluidDisplacer.getRegistryName()));
 		registry.register(new ItemBlock(shrineReceptacle).setRegistryName(shrineReceptacle.getRegistryName()));
 		registry.register(new ItemBlock(energiser).setRegistryName(energiser.getRegistryName()));
 		registry.register(new ItemBlock(chromaOre).setRegistryName(chromaOre.getRegistryName()));
 		registry.register(new ItemBlock(extractor).setRegistryName(extractor.getRegistryName()));
 		registry.register(new ItemBlock(bonfire).setRegistryName(bonfire.getRegistryName()));
+		registry.register(new ItemBlock(battery).setRegistryName(battery.getRegistryName()));
+		registry.register(new ItemBlock(landLeveller).setRegistryName(landLeveller.getRegistryName()));
 	}
 
 	
@@ -65,6 +69,8 @@ public class ModBlocks {
 		registerTile(TileEnergiser.class, LibBlocks.ENERGISER);
 		registerTile(TileExtractor.class, LibBlocks.CHROMATIC_EXTRACTOR);
 		registerTile(TileBonfire.class, LibBlocks.BONFIRE);
+		registerTile(TileBattery.class, LibBlocks.BATTERY);
+		registerTile(TileLandLeveller.class, LibBlocks.LAND_LEVELLER);
 	}
 	
 	private static void registerTile(Class<? extends TileEntity> clazz, String key) {

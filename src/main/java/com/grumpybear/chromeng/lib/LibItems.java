@@ -10,6 +10,9 @@ public class LibItems {
 	public static final String PALETTE = "palette";
 	public static final String LORDVESSEL = "lordvessel";
 	public static final String EXTENSION_CONDUIT = "extensionConduit";
+	public static final String INSPECTOR = "inspector";
+	public static final String MLE = "MLE";
+	public static final String VOID_VACUUM = "voidVacuum";
 	
 	public static final String[] DUST_TYPES = new String[] {
 			"dustEffervescent",

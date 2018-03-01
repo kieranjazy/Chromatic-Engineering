@@ -2,7 +2,6 @@ package com.grumpybear.chromeng.item;
 
 import com.grumpybear.chromeng.chroma.ChromaUnit;
 import com.grumpybear.chromeng.chroma.EnumColour;
-import com.grumpybear.chromeng.chroma.IChargeableSingle;
 import com.grumpybear.chromeng.util.EnumColourUtil;
 import com.grumpybear.chromeng.util.ItemStackUtil;
 import net.minecraft.client.util.ITooltipFlag;
@@ -19,7 +18,7 @@ import static com.grumpybear.chromeng.util.ItemStackUtil.getNBT;
 /**
  * Created by Kieran on 6/28/2017.
  */
-public abstract class ItemChargeSingle extends ItemCE implements IChargeableSingle{
+public abstract class ItemChargeSingle extends ItemCE{
 
    public final EnumColour COLOUR_TYPE;
 
@@ -31,6 +30,10 @@ public abstract class ItemChargeSingle extends ItemCE implements IChargeableSing
    }
 
    @Override
+   public int getItemStackLimit(ItemStack stack) {
+      return 1;
+   }
+
    public boolean addCE(ItemStack stack, int i) {
       if (getChromaUnit(stack).getCurrentCE() + i <= getChromaUnit(stack).getMaxCE()) {
          ChromaUnit temp = getChromaUnit(stack);
@@ -42,7 +45,10 @@ public abstract class ItemChargeSingle extends ItemCE implements IChargeableSing
       return false;
    }
 
-   @Override
+   public boolean addCE(ItemStack stack) {
+      return addCE(stack, getCECost());
+   }
+
    public boolean minusCE(ItemStack stack, int i) {
       if (getChromaUnit(stack).getCurrentCE() - i >= 0) {
          ChromaUnit temp = getChromaUnit(stack);
@@ -54,7 +60,16 @@ public abstract class ItemChargeSingle extends ItemCE implements IChargeableSing
       return false;
    }
 
-   @Override
+   public boolean minusCE(ItemStack stack) {
+      return minusCE(stack, getCECost());
+   }
+
+   public void setCE(ItemStack stack, int i) {
+      ChromaUnit temp = getChromaUnit(stack);
+      temp.setCurrentCE(i);
+      temp.writeToNBT(getNBT(stack));
+   }
+
    public ChromaUnit getChromaUnit(ItemStack stack) {
       ChromaUnit temp = new ChromaUnit(this.getColourType(), 1000);
 
@@ -67,7 +82,6 @@ public abstract class ItemChargeSingle extends ItemCE implements IChargeableSing
       return temp;
    }
 
-   @Override
    public EnumColour getColourType() {
       return this.COLOUR_TYPE;
    }

@@ -7,12 +7,12 @@ import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.util.ResourceLocation;
 
-public class GuiExtractor extends GuiChroma{
+public class GuiExtractor extends GuiCEUser{
 	
 	private IInventory tileExtractor;
 	
 	public GuiExtractor(IInventory playerInv, TileExtractor tile) {
-		super(new ContainerExtractor(playerInv, tile), (IChromaStorage) tile);
+		super(new ContainerExtractor(playerInv, tile), (IChromaStorage) tile, 173, 3);
 		
 		this.xSize = 176;
 		this.ySize = 166;
@@ -22,6 +22,8 @@ public class GuiExtractor extends GuiChroma{
 
    @Override
 	protected void drawGuiContainerBackgroundLayer(float partialTicks, int mouseX, int mouseY) {
+
+      super.drawGuiContainerBackgroundLayer(partialTicks, mouseX, mouseY);
 		
 		int i = (this.width - this.xSize) / 2;
         int j = (this.height - this.ySize) / 2;
@@ -38,7 +40,7 @@ public class GuiExtractor extends GuiChroma{
 
         int l = this.getCookProgressScaled(24);
         this.drawTexturedModalRect(i + 79, j + 34, 176, 14, l + 1, 16);
-      super.drawGuiContainerBackgroundLayer(partialTicks, mouseX, mouseY);
+
 	}
 	
 	private int getCookProgressScaled(int pixels)

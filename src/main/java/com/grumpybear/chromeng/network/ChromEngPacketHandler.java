@@ -14,5 +14,9 @@ public class ChromEngPacketHandler {
    public static void register() {
       INSTANCE.registerMessage(MessageLink.MessageLinkHandler.class, MessageLink.class, 0, Side.SERVER);
       INSTANCE.registerMessage(MessageSwitchMode.MessageSwitchModeHandler.class, MessageSwitchMode.class, 1, Side.SERVER);
+      INSTANCE.registerMessage(MessageAddLordvessel.MessageAddLordvesselHandler.class, MessageAddLordvessel.class, 2, Side.SERVER);
+      INSTANCE.registerMessage(MessageNBTLordvessel.MessageNBTLordvesselHandler.class, MessageNBTLordvessel.class, 3, Side.SERVER);
+      INSTANCE.registerMessage(MessageTeleport.MessageTeleportHandler.class, MessageTeleport.class, 4, Side.SERVER);
+      INSTANCE.registerMessage(MessageCEChange.MessageCEChangeHandler.class, MessageCEChange.class, 5, Side.SERVER);
    }
 }

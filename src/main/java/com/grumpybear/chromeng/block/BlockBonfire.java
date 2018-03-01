@@ -27,12 +27,6 @@ public class BlockBonfire extends BlockCE{
 		super(Material.ROCK, LibBlocks.BONFIRE);
 	}
 
-
-	@SuppressWarnings("Deprecated")
-	@Override
-	public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos) {
-		return FULL_BLOCK_AABB;
-	}
 	
 	public boolean canPlaceBlockAt(World worldIn, BlockPos pos)
     {

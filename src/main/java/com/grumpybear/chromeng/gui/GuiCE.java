@@ -44,4 +44,20 @@ public class GuiCE extends GuiContainer {
    public void addElement(Element element) {
       elements.add(element);
    }
+
+   public void removeElement(Element element) {
+      elements.remove(element);
+   }
+
+   public ArrayList<Element> getElements(Class<? extends Element> type) {
+      ArrayList<Element> elementsoftype = new ArrayList<>();
+
+      for (Element element : elements) {
+         if (type.isAssignableFrom(element.getClass())) {
+            elementsoftype.add(element);
+         }
+      }
+
+      return elementsoftype;
+   }
 }

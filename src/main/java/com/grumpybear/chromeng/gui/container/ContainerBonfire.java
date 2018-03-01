@@ -34,4 +34,5 @@ public class ContainerBonfire extends ContainerCE implements ISlotFilter {
 
       return false;
    }
+
 }

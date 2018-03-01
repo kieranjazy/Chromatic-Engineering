@@ -18,6 +18,8 @@ public class ModItems {
 	public static Item palette = new ItemPalette();
 	public static Item lordvessel = new ItemLordvessel();
 	public static Item extensionConduit = new ItemExtensionConduit();
+	public static Item inspector = new ItemInspector();
+	public static Item voidVacuum = new ItemVoidVacuum();
 	
 	@SubscribeEvent
 	public static void registerItems(RegistryEvent.Register<Item> evt) {
@@ -29,5 +31,7 @@ public class ModItems {
 		registry.register(palette);
 		registry.register(lordvessel);
 		registry.register(extensionConduit);
+		registry.register(inspector);
+		registry.register(voidVacuum);
 	}
 }

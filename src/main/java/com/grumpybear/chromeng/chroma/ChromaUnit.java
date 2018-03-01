@@ -41,6 +41,20 @@ public class ChromaUnit {
 		if (this.currentCE - currentCE >= 0)
 			this.currentCE -= currentCE;
 	}
+
+	public boolean canMinusCE(int value) {
+		if (this.currentCE - value >= 0)
+			return true;
+
+		return false;
+	}
+
+	public boolean canAddCE(int value) {
+		if (this.currentCE + value <= maxCE)
+			return true;
+
+		return false;
+	}
 	
 	public NBTTagCompound writeToNBT(NBTTagCompound nbt) {
 		String temp = EnumColourUtil.colourToString(chromaType);

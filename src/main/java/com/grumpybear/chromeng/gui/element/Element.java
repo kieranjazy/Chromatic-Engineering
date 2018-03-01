@@ -33,6 +33,11 @@ public abstract class Element {
       this.xPos = xPos;
       this.yPos = yPos;
       this.gui = gui;
+      this.visible = true;
+   }
+
+   public Element() {
+
    }
 
    public void drawRectangle(int x, int y, int textureX, int textureY, int widthX, int heightY) {

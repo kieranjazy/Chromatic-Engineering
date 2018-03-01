@@ -3,8 +3,13 @@ package com.grumpybear.chromeng.gui;
 import com.grumpybear.chromeng.block.tile.TileBonfire;
 import com.grumpybear.chromeng.gui.container.ContainerBonfire;
 import com.grumpybear.chromeng.gui.element.Button;
+import com.grumpybear.chromeng.gui.element.Element;
+import com.grumpybear.chromeng.gui.element.IconButton;
 import com.grumpybear.chromeng.init.ModItems;
+import com.grumpybear.chromeng.lib.LibIcons;
+import com.grumpybear.chromeng.lib.LibTextures;
 import com.grumpybear.chromeng.network.ChromEngPacketHandler;
+import com.grumpybear.chromeng.network.MessageAddLordvessel;
 import com.grumpybear.chromeng.network.MessageLink;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiTextField;
@@ -31,9 +36,11 @@ public class GuiBonfire extends GuiCE{
    private ResourceLocation resLoc = new ResourceLocation(texLoc);
 
    public Button linkButton;
+   private IconButton.IconReturn selected;
 
    public GuiBonfire(IInventory playerInv, TileBonfire tile) {
       super(new ContainerBonfire(playerInv, tile));
+      this.xSize = 255;
 
       this.bonfire = tile;
    }
@@ -41,18 +48,23 @@ public class GuiBonfire extends GuiCE{
    @Override
    public void initGui() {
       super.initGui();
-      //linkButton = new Button(27, 18, this.guiLeft + 91, this.guiTop + 63, this, texLoc, 0, 198, 0, 216, "Link");
       linkButton = new Button(27, 18, this.guiLeft + 91, this.guiTop + 63, this, texLoc, 0, 198, 0, 216, "");
 
       addElement(linkButton);
 
+      for (int i = 1; i <= 6; i++) {
+         for (int j = 1; j <= 3; j++) {
+            addElement(new IconButton( this.guiLeft + 159 + (21 * j), this.guiTop + 2 + (22 * i), this, LibIcons.HOUSE));
+         }
+      }
+
       Keyboard.enableRepeatEvents(true);
 
-      this.nameField = new GuiTextField(0, this.fontRendererObj, this.guiLeft + 12, this.guiTop + 32, 103, 32);
+      this.nameField = new GuiTextField(0, this.fontRendererObj, this.guiLeft + 11, this.guiTop + 32, 68, 32);
       this.nameField.setTextColor(-1);
       this.nameField.setDisabledTextColour(-1);
       this.nameField.setEnableBackgroundDrawing(false);
-      this.nameField.setMaxStringLength(17);
+      this.nameField.setMaxStringLength(10);
 
    }
 
@@ -83,7 +95,7 @@ public class GuiBonfire extends GuiCE{
       GlStateManager.color(1.0f,  1.0f,  1.0f, 1.0f);
       Minecraft.getMinecraft().getTextureManager().bindTexture(resLoc);
       this.drawTexturedModalRect(this.guiLeft, this.guiTop, 0, 0, this.xSize, this.ySize);
-      this.drawTexturedModalRect(this.guiLeft + 8, this.guiTop + 28, 0, this.ySize + (this.bonfire.getStackInSlot(0) == ItemStack.EMPTY ? 0 : 16), 110, 16);
+      this.drawTexturedModalRect(this.guiLeft + 7, this.guiTop + 28, 0, this.ySize + (this.bonfire.getStackInSlot(0) == ItemStack.EMPTY ? 0 : 16), 110, 16);
 
       this.nameField.drawTextBox();
 
@@ -94,6 +106,13 @@ public class GuiBonfire extends GuiCE{
    protected void drawGuiContainerForegroundLayer(int mouseX, int mouseY) {
       super.drawGuiContainerForegroundLayer(mouseX, mouseY);
       fontRendererObj.drawString("Name:", 8, 19, 4210752);
+      fontRendererObj.drawString("Bonfire", 72, 6, 4210752);
+      fontRendererObj.drawSplitString("Select Icon", 183, 15, 70, 4210752);
+
+      if (selected != null) {
+         Minecraft.getMinecraft().getTextureManager().bindTexture(LibTextures.ICON_LOCATION);
+         this.drawTexturedModalRect(152, 64, selected.getIconX(), selected.getIconY(), 16, 16);
+      }
    }
 
    @Override
@@ -105,6 +124,17 @@ public class GuiBonfire extends GuiCE{
       if (elements.get(0).intersectsWith(mouseX, mouseY)) {
          if (bonfire.getStackInSlot(0).getItem() == ModItems.darksign) {
             ChromEngPacketHandler.INSTANCE.sendToServer(new MessageLink(bonfire.getPos(), nameField.getText()));
+         } else if (bonfire.getStackInSlot(0).getItem() == ModItems.lordvessel) {
+            if (selected != null)
+               ChromEngPacketHandler.INSTANCE.sendToServer(new MessageAddLordvessel(bonfire.getPos(), nameField.getText(), selected));
+         }
+      }
+
+      for (Element button : elements) {
+         if (button instanceof IconButton) {
+            if (button.intersectsWith(mouseX, mouseY)) {
+               selected = ((IconButton) button).getIcon();
+            }
          }
       }
    }

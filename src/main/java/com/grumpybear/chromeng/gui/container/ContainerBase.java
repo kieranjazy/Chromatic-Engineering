@@ -24,6 +24,12 @@ public class ContainerBase extends Container {
 
    }
 
+   public void proxyAddSlot(Slot slot) {
+      this.addSlotToContainer(slot);
+   }
+
+
+
    @Override
    public boolean canInteractWith(EntityPlayer playerIn) {
       return true;
